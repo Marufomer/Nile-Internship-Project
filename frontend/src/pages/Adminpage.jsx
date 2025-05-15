@@ -131,7 +131,7 @@ function LoadingScreen() {
         <FiLoader />
       </motion.div>
       <motion.h2 
-        className="text-white text-2xl font-bold"
+        className="text-black text-2xl font-bold"
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >

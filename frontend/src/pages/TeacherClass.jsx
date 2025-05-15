@@ -666,7 +666,7 @@ function TeacherClass() {
               </div>
             </form>
           </div>
-        </div>
+    </div>
       )}
     </div>
   );

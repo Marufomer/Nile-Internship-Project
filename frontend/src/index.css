@@ -5,7 +5,7 @@
 /* Default dark mode styles */
 @layer base {
   html.dark {
-    @apply bg-gray-900 text-white;
+    @apply bg-gray-900 text-black;
   }
 
   html {
@@ -26,6 +26,6 @@
   html.dark h6, 
   html.dark span, 
   html.dark div {
-    @apply text-white;
+    @apply text-black;
   }
 }

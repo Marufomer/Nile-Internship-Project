@@ -148,14 +148,14 @@ function StudentDashboard() {
             </div>
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div className="mb-4 md:mb-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{getGreeting()}, {Authuser?.firstName || 'Student'}</h2>
-                <p className="text-blue-100">Welcome to your dashboard. Here's an overview of your courses and assignments.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{getGreeting()}, {Authuser?.firstName || 'Student'}</h2>
+                <p className="text-blue-700">Welcome to your dashboard. Here's an overview of your courses and assignments.</p>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 w-full md:w-auto">
-                <p className="font-medium text-white">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="font-medium">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 <div className="mt-2 flex items-center">
                   <span className="inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                  <p className="text-sm text-blue-100">Next Class: {upcomingClasses[0]?.title || 'None Today'}</p>
+                  <p className="text-sm">Next Class: {upcomingClasses[0]?.title || 'None Today'}</p>
                 </div>
               </div>
             </div>
@@ -176,8 +176,8 @@ function StudentDashboard() {
                   <FiBookOpen className="text-blue-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Enrolled Courses</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.courses}</p>
+                  <p className="text-black text-sm font-medium">Enrolled Courses</p>
+                  <p className="text-3xl font-bold text-black">{stats.courses}</p>
                 </div>
               </div>
               <div className="bg-gray-50 -mx-6 px-6 py-3 border-t">
@@ -200,14 +200,14 @@ function StudentDashboard() {
                   <FiClipboard className="text-indigo-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Assignments</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.assignments}</p>
+                  <p className="text-black text-sm font-medium">Assignments</p>
+                  <p className="text-3xl font-bold text-black">{stats.assignments}</p>
                 </div>
               </div>
               <div className="mt-2 mb-2">
                 <div className="flex justify-between mb-1">
-                  <span className="text-sm text-gray-600">Completion</span>
-                  <span className="text-sm font-medium text-gray-800">
+                  <span className="text-sm text-black">Completion</span>
+                  <span className="text-sm font-medium text-black">
                     {Math.round((stats.completedAssignments / stats.assignments) * 100)}%
                   </span>
                 </div>
@@ -243,8 +243,8 @@ function StudentDashboard() {
                   <FiAward className="text-green-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Average Grade</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.averageGrade}%</p>
+                  <p className="text-black text-sm font-medium">Average Grade</p>
+                  <p className="text-3xl font-bold text-black">{stats.averageGrade}%</p>
                 </div>
               </div>
               
@@ -253,19 +253,19 @@ function StudentDashboard() {
                   <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-1">
                     <span className="text-blue-700 font-medium">A</span>
                   </div>
-                  <span className="text-xs text-gray-500">2 Courses</span>
+                  <span className="text-xs text-black">2 Courses</span>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-1">
                     <span className="text-green-700 font-medium">B</span>
                   </div>
-                  <span className="text-xs text-gray-500">3 Courses</span>
+                  <span className="text-xs text-black">3 Courses</span>
                 </div>
                 <div className="flex flex-col items-center">
                   <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mb-1">
                     <span className="text-yellow-700 font-medium">C</span>
                   </div>
-                  <span className="text-xs text-gray-500">1 Course</span>
+                  <span className="text-xs text-black">1 Course</span>
                 </div>
               </div>
               
@@ -289,15 +289,15 @@ function StudentDashboard() {
                   <FiCalendar className="text-amber-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Today's Classes</p>
-                  <p className="text-3xl font-bold text-gray-800">{upcomingClasses.length}</p>
+                  <p className="text-black text-sm font-medium">Today's Classes</p>
+                  <p className="text-3xl font-bold text-black">{upcomingClasses.length}</p>
                 </div>
               </div>
               
               <div className="bg-amber-50 p-2 rounded-lg mb-2">
-                <p className="text-amber-700 text-sm font-medium">Next: {formatDateTime(upcomingClasses[0].time)}</p>
-                <p className="text-gray-800 font-medium truncate">{upcomingClasses[0].title}</p>
-                <p className="text-xs text-gray-600 mt-0.5">{upcomingClasses[0].room} • {upcomingClasses[0].teacher}</p>
+                <p className="text-black text-sm font-medium">Next: {formatDateTime(upcomingClasses[0].time)}</p>
+                <p className="text-black font-medium truncate">{upcomingClasses[0].title}</p>
+                <p className="text-xs text-black mt-0.5">{upcomingClasses[0].room} • {upcomingClasses[0].teacher}</p>
               </div>
               
               <div className="flex justify-center bg-gray-50 -mx-6 px-6 py-3 border-t mt-3">
@@ -318,7 +318,7 @@ function StudentDashboard() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800">Course Progress</h3>
+                <h3 className="font-semibold text-lg text-black">Course Progress</h3>
                 <Link to="/student/courses" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
                   View All Courses <FiBarChart2 className="ml-1" />
                 </Link>
@@ -331,12 +331,12 @@ function StudentDashboard() {
                   <div key={course.id} className="py-4 first:pt-0 last:pb-0">
                     <div className="flex items-center justify-between mb-2">
                       <div>
-                        <h4 className="font-medium text-gray-800">{course.name}</h4>
-                        <p className="text-sm text-gray-500">Current Grade: <span className="font-medium text-blue-600">{course.grade}</span></p>
+                        <h4 className="font-medium text-black">{course.name}</h4>
+                        <p className="text-sm text-black">Current Grade: <span className="font-medium text-blue-600">{course.grade}</span></p>
                       </div>
                       <div className="text-right">
-                        <span className="font-medium text-gray-800">{course.progress}%</span>
-                        <p className="text-sm text-gray-500">Completed</p>
+                        <span className="font-medium text-black">{course.progress}%</span>
+                        <p className="text-sm text-black">Completed</p>
                       </div>
                     </div>
                     <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
@@ -364,7 +364,7 @@ function StudentDashboard() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800">Upcoming Assignments</h3>
+                <h3 className="font-semibold text-lg text-black">Upcoming Assignments</h3>
                 <Link to="/student/assignments" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
                   All Assignments
                 </Link>
@@ -387,9 +387,9 @@ function StudentDashboard() {
                         }
                       </div>
                       <div className="flex-grow">
-                        <h4 className="font-medium text-gray-800">{assignment.title}</h4>
+                        <h4 className="font-medium text-black">{assignment.title}</h4>
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-                          <p className="text-sm text-gray-600">{assignment.course}</p>
+                          <p className="text-sm text-black">{assignment.course}</p>
                           <span className={`text-xs mt-1 sm:mt-0 py-1 px-2 rounded-full ${
                             getDaysRemaining(assignment.dueDate).includes('today') ? 
                               'bg-red-100 text-red-700' : 

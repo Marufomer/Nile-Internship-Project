@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FiSearch, FiBell, FiSettings, FiLogOut, FiUser } from "react-icons/fi";
+import { FiSearch, FiBell, FiSettings, FiLogOut, FiUser, FiSun, FiMoon } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,6 +7,7 @@ import { logout } from "../features/Authentication";
 import toast from 'react-hot-toast';
 import NotificationDropdown from './NotificationDropdown';
 import ProfilePicture from './ProfilePicture';
+import { useDarkMode } from '../context/DarkModeContext';
 
 function TopNavbar() {
   const { Authuser } = useSelector((state) => state.auth);
@@ -18,6 +19,7 @@ function TopNavbar() {
   const notificationRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { darkMode, setDarkMode } = useDarkMode();
 
   // Debug the Authuser object
   useEffect(() => {
@@ -80,12 +82,12 @@ function TopNavbar() {
   };
 
   return (
-    <div className='bg-white shadow-md z-50 fixed top-0 left-0 right-0'>
+    <div className='bg-white dark:bg-gray-800 shadow-md z-50 fixed top-0 left-0 right-0'>
       <nav className='w-full h-12 flex items-center justify-between px-2 sm:px-3'>
         {/* Left side - Welcome message */}
         <div className="pl-1">
           <motion.h1 
-            className='text-sm sm:text-base md:text-lg font-semibold text-gray-800 truncate max-w-[120px] sm:max-w-[180px] md:max-w-none'
+            className='text-sm sm:text-base md:text-lg font-semibold text-black dark:text-white truncate max-w-[120px] sm:max-w-[180px] md:max-w-none'
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -96,20 +98,28 @@ function TopNavbar() {
         
         {/* Right side - Search, notifications, profile */}
         <div className='flex items-center space-x-1 sm:space-x-2 md:space-x-4'>
+          {/* Theme Toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className='p-1 text-black dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
+          >
+            {darkMode ? <FiSun className="text-lg" /> : <FiMoon className="text-lg" />}
+          </button>
+
           {/* Search */}
           <div className='relative hidden md:block'>
             <input 
               type="text" 
               placeholder="Search..." 
-              className="py-1 pl-8 pr-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" 
+              className="py-1 pl-8 pr-2 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
             />
-            <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black dark:text-gray-400" />
           </div>
           
           {/* Notifications */}
           <div className="relative" ref={notificationRef}>
             <button 
-              className='relative p-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors'
+              className='relative p-1 text-black dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
               onClick={toggleNotifications}
             >
               <FiBell className="text-lg" />
@@ -139,12 +149,12 @@ function TopNavbar() {
                   firstName={Authuser?.firstName}
                   size="small"
                   editable={false}
-                  key={profileImageKey} // Force re-render when Authuser changes
+                  key={profileImageKey}
                 />
               </div>
               <div className='hidden md:block text-left'>
-                <h2 className='text-gray-800 font-medium text-xs sm:text-sm'>{getDisplayName()}</h2>
-                <p className='text-gray-500 text-xs'>{getUserRole()}</p>
+                <h2 className='text-black dark:text-white font-medium text-xs sm:text-sm'>{getDisplayName()}</h2>
+                <p className='text-gray-600 dark:text-gray-400 text-xs'>{getUserRole()}</p>
               </div>
             </button>
             
@@ -152,22 +162,22 @@ function TopNavbar() {
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.div 
-                  className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100'
+                  className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50 border border-gray-100 dark:border-gray-700'
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/account`} className='flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors'>
-                    <FiUser className="mr-3 text-gray-500" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/account`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
+                    <FiUser className="mr-3 text-gray-500 dark:text-gray-400" />
                     My Profile
                   </Link>
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/settings`} className='flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors'>
-                    <FiSettings className="mr-3 text-gray-500" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/settings`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
+                    <FiSettings className="mr-3 text-gray-500 dark:text-gray-400" />
                     Settings
                   </Link>
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/notifications`} className='flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors'>
-                    <FiBell className="mr-3 text-gray-500" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/notifications`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
+                    <FiBell className="mr-3 text-gray-500 dark:text-gray-400" />
                     Notifications
                     {unreadCount > 0 && (
                       <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
@@ -175,10 +185,10 @@ function TopNavbar() {
                       </span>
                     )}
                   </Link>
-                  <hr className='my-1 border-gray-100' />
+                  <hr className='my-1 border-gray-100 dark:border-gray-700' />
                   <button 
                     onClick={handleLogout}
-                    className='w-full flex items-center px-4 py-2 text-red-600 hover:bg-red-50 transition-colors'
+                    className='w-full flex items-center px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors'
                   >
                     <FiLogOut className="mr-3" />
                     Logout
@@ -189,7 +199,7 @@ function TopNavbar() {
           </div>
         </div>
       </nav>
-      <hr className='border-gray-200' />
+      <hr className='border-gray-200 dark:border-gray-700' />
     </div>
   );
 }

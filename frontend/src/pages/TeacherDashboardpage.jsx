@@ -133,14 +133,14 @@ function TeacherDashboardpage() {
             </div>
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div className="mb-4 md:mb-0">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{getGreeting()}, {Authuser?.firstName || 'Teacher'}</h2>
-                <p className="text-blue-100">Welcome to your dashboard. Here's an overview of your classes and assignments.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-black mb-2">{getGreeting()}, {Authuser?.firstName || 'Teacher'}</h2>
+                <p>Welcome to your dashboard. Here's an overview of your classes and assignments.</p>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 w-full md:w-auto">
-                <p className="font-medium text-white">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="font-medium">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 <div className="mt-2 flex items-center">
                   <span className="inline-block w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                  <p className="text-sm text-blue-100">Next Class: {upcomingClasses[0]?.title || 'None Today'}</p>
+                  <p className="text-sm">Next Class: {upcomingClasses[0]?.title || 'None Today'}</p>
                 </div>
               </div>
             </div>
@@ -161,8 +161,8 @@ function TeacherDashboardpage() {
                   <FiBookOpen className="text-blue-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">My Classes</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.classes}</p>
+                  <p className="text-sm font-medium">My Classes</p>
+                  <p className="text-3xl font-bold">{stats.classes}</p>
                 </div>
               </div>
               <div className="bg-gray-50 -mx-6 px-6 py-3 border-t">
@@ -185,18 +185,18 @@ function TeacherDashboardpage() {
                   <FiUsers className="text-teal-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Total Students</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.students}</p>
+                  <p className="text-sm font-medium">Total Students</p>
+                  <p className="text-3xl font-bold">{stats.students}</p>
                 </div>
               </div>
               <div className="flex justify-between items-center bg-gray-50 -mx-6 px-6 py-3 border-t">
                 <div>
-                  <span className="text-teal-600 font-semibold text-sm">Avg. Attendance</span>
+                  <span className="text-font-semibold text-sm">Avg. Attendance</span>
                   <div className="flex items-center mt-1">
                     <div className="w-24 h-1.5 bg-gray-200 rounded-full mr-2">
                       <div className="h-full bg-teal-500 rounded-full" style={{ width: '92%' }}></div>
                     </div>
-                    <span className="text-sm text-gray-800">92%</span>
+                    <span className="text-sm">92%</span>
                   </div>
                 </div>
               </div>
@@ -215,14 +215,14 @@ function TeacherDashboardpage() {
                   <FiClipboard className="text-purple-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Active Assignments</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.assignments}</p>
+                  <p className="text-sm font-medium">Active Assignments</p>
+                  <p className="text-3xl font-bold">{stats.assignments}</p>
                 </div>
               </div>
               <div className="flex items-center justify-between bg-gray-50 -mx-6 px-6 py-3 border-t">
                 <div>
-                  <span className="text-green-600 font-semibold">64%</span>
-                  <span className="text-gray-500 text-sm ml-1">Submitted</span>
+                  <span className="text-font-semibold">64%</span>
+                  <span className="text-sm ml-1">Submitted</span>
                 </div>
                 <Link to="/teacher/TeachersAssignmentpage" className="text-purple-600 hover:text-purple-800 text-sm font-medium">
                   Manage
@@ -243,8 +243,8 @@ function TeacherDashboardpage() {
                   <FiCalendar className="text-amber-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Upcoming Classes</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.upcomingClasses}</p>
+                  <p className="text-sm font-medium">Upcoming Classes</p>
+                  <p className="text-3xl font-bold">{stats.upcomingClasses}</p>
                 </div>
               </div>
               <div className="bg-amber-50 p-2 rounded-lg mb-2">
@@ -269,7 +269,7 @@ function TeacherDashboardpage() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800">Recent Assignments</h3>
+                <h3 className="font-semibold text-lg">Recent Assignments</h3>
                 <Link to="/teacher/TeachersAssignmentpage" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
                   View All <FiPlusCircle className="ml-1" />
                 </Link>
@@ -286,16 +286,16 @@ function TeacherDashboardpage() {
                       </div>
                       <div className="flex-grow">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-                          <h4 className="font-medium text-gray-800 mb-1 sm:mb-0">{assignment.title}</h4>
-                          <span className="text-sm text-gray-500">
+                          <h4 className="font-medium mb-1 sm:mb-0">{assignment.title}</h4>
+                          <span className="text-sm">
                             Due: {assignment.dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 mt-1">{assignment.class}</p>
+                        <p className="text-sm mt-1">{assignment.class}</p>
                         <div className="mt-2">
                           <div className="flex justify-between mb-1">
-                            <span className="text-xs text-gray-500">Submissions</span>
-                            <span className="text-xs text-gray-700">{assignment.submissionsCount}/{assignment.totalStudents}</span>
+                            <span className="text-xs">Submissions</span>
+                            <span className="text-xs">{assignment.submissionsCount}/{assignment.totalStudents}</span>
                           </div>
                           <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
                             <div 
@@ -322,7 +322,7 @@ function TeacherDashboardpage() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800">Upcoming Classes</h3>
+                <h3 className="font-semibold text-lg">Upcoming Classes</h3>
                 <Link to="/teacher/timetable" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
                   Full Schedule <FiCalendar className="ml-1" />
                 </Link>
@@ -338,13 +338,13 @@ function TeacherDashboardpage() {
                         <FiClock className="text-blue-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-800">{cls.title}</p>
-                        <p className="text-sm text-gray-500">{formatDateTime(cls.time)}</p>
+                        <p className="font-medium">{cls.title}</p>
+                        <p className="text-sm">{formatDateTime(cls.time)}</p>
                       </div>
                     </div>
                     <div className="ml-13 pl-10">
                       <div className="flex justify-between items-center">
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm">
                           <span className="inline-block px-2 py-1 bg-blue-50 text-blue-700 rounded-md mr-2">
                             {cls.room}
                           </span>

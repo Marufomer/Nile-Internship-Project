@@ -157,21 +157,21 @@ function AdminDashboard() {
             </div>
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div className="mb-3 md:mb-0">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">{getGreeting()}, {Authuser?.firstName || 'Admin'}</h2>
-                <p className="text-blue-100 text-sm">Welcome to your dashboard. Here's an overview of your school.</p>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-1">{getGreeting()}, {Authuser?.firstName || 'Admin'}</h2>
+                <p className="text-sm">Welcome to your dashboard. Here's an overview of your school.</p>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 sm:p-3 w-full md:w-auto">
-                <p className="font-medium text-white text-sm">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="font-medium text-sm">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 <div className="mt-1 flex items-center">
                   <span className="inline-block w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></span>
-                  <p className="text-xs text-blue-100">Last login: {getLastLogin()}</p>
+                  <p className="text-xs text-sm">Last login: {getLastLogin()}</p>
                 </div>
               </div>
             </div>
             <div className="relative z-10 mt-3">
               <button 
                 onClick={handleRefreshData}
-                className="flex items-center bg-white/20 text-white px-3 py-1.5 rounded-lg hover:bg-white/30 transition-colors text-sm"
+                className="flex items-center bg-gray-200 text-black px-3 py-1.5 rounded-lg hover:bg-gray-300 transition-colors text-sm"
                 disabled={isRefreshing}
               >
                 <FiRefreshCw className={`mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
@@ -197,8 +197,8 @@ function AdminDashboard() {
                   <FiUsers className="text-blue-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Total Students</p>
-                  <p className="text-3xl font-bold text-gray-800">{studentStats.total || 0}</p>
+                  <p className="text-sm font-medium text-black">Total Students</p>
+                  <p className="text-3xl font-bold text-black">{studentStats.total || 0}</p>
                 </div>
               </div>
 
@@ -208,10 +208,10 @@ function AdminDashboard() {
                 className="overflow-hidden mb-4"
               >
                 <div className="bg-blue-50 p-3 rounded-lg">
-                  <h4 className="font-medium text-blue-700 mb-2">Student Distribution</h4>
+                  <h4 className="font-medium mb-2 text-black">Student Distribution</h4>
                   <div className="space-y-2">
                     <div>
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm text-black">
                         <span>Active</span>
                         <span>{studentStats.active || 0} ({studentStats.total ? Math.round((studentStats.active / studentStats.total) * 100) : 0}%)</span>
                       </div>
@@ -223,7 +223,7 @@ function AdminDashboard() {
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm text-black">
                         <span>Suspended</span>
                         <span>{studentStats.suspended || 0} ({studentStats.total ? Math.round((studentStats.suspended / studentStats.total) * 100) : 0}%)</span>
                       </div>
@@ -235,7 +235,7 @@ function AdminDashboard() {
                       </div>
                     </div>
                     <div>
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm text-black">
                         <span>Graduated</span>
                         <span>{studentStats.graduated || 0} ({studentStats.total ? Math.round((studentStats.graduated / studentStats.total) * 100) : 0}%)</span>
                       </div>
@@ -252,16 +252,16 @@ function AdminDashboard() {
               
               <div className="flex justify-between mt-4 bg-gray-50 -mx-6 px-6 py-3 border-t">
                 <div>
-                  <span className="text-green-500 font-semibold">{studentStats.active || 0}</span>
-                  <span className="text-gray-500 text-sm ml-1">Active</span>
+                  <span className="font-semibold">{studentStats.active || 0}</span>
+                  <span className="text-sm ml-1">Active</span>
                 </div>
                 <div>
-                  <span className="text-red-500 font-semibold">{studentStats.suspended || 0}</span>
-                  <span className="text-gray-500 text-sm ml-1">Suspended</span>
+                  <span className="font-semibold">{studentStats.suspended || 0}</span>
+                  <span className="text-sm ml-1">Suspended</span>
                 </div>
                 <div>
-                  <span className="text-blue-500 font-semibold">{studentStats.graduated || 0}</span>
-                  <span className="text-gray-500 text-sm ml-1">Graduated</span>
+                  <span className="font-semibold">{studentStats.graduated || 0}</span>
+                  <span className="text-sm ml-1">Graduated</span>
                 </div>
               </div>
             </div>
@@ -280,15 +280,15 @@ function AdminDashboard() {
                   <FiDollarSign className="text-green-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Total Fees</p>
-                  <p className="text-3xl font-bold text-gray-800">${totalFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                  <p className="text-sm font-medium text-black">Total Fees</p>
+                  <p className="text-3xl font-bold text-black">${totalFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
               </div>
               
               <div className="mt-4 mb-2">
                 <div className="flex justify-between mb-1">
-                  <span className="text-sm text-gray-600">Payment Progress</span>
-                  <span className="text-sm font-medium text-gray-800">{paidPercentage}%</span>
+                  <span className="text-sm">Payment Progress</span>
+                  <span className="font-medium">{paidPercentage}%</span>
                 </div>
                 <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
                   <motion.div 
@@ -302,12 +302,12 @@ function AdminDashboard() {
               
               <div className="flex justify-between bg-gray-50 -mx-6 px-6 py-3 border-t">
                 <div>
-                  <span className="text-green-500 font-semibold">${paidFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                  <p className="text-gray-500 text-sm">Paid</p>
+                  <span className="font-semibold">${paidFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <p className="text-sm">Paid</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-red-500 font-semibold">${unpaidFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                  <p className="text-gray-500 text-sm">Unpaid</p>
+                  <span className="font-semibold">${unpaidFees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <p className="text-sm">Unpaid</p>
                 </div>
               </div>
             </div>
@@ -326,10 +326,10 @@ function AdminDashboard() {
                   <FiCalendar className="text-purple-600 text-xl" />
                 </div>
                 <div>
-                  <p className="text-gray-500 text-sm font-medium">Scheduled Events</p>
+                  <p className="text-sm font-medium text-black">Scheduled Events</p>
                   <div className="flex items-baseline">
-                    <p className="text-3xl font-bold text-gray-800">{Timetables?.length || 0}</p>
-                    <p className="text-gray-500 text-sm ml-1">total</p>
+                    <p className="text-3xl font-bold text-black">{Timetables?.length || 0}</p>
+                    <p className="text-sm ml-1">total</p>
                   </div>
                 </div>
               </div>
@@ -341,20 +341,20 @@ function AdminDashboard() {
                     variants={pulseVariants}
                     animate="pulse"
                   >
-                    <p className="text-purple-700 text-sm font-medium">
+                    <p className="text-sm font-medium text-black">
                       Next: {formatEventDate(upcomingEvents[0].startTime)}
                     </p>
-                    <p className="text-gray-800 font-medium truncate">{upcomingEvents[0].title}</p>
+                    <p className="font-medium truncate text-black">{upcomingEvents[0].title}</p>
                   </motion.div>
                   {upcomingEvents.length > 1 && (
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm mt-1">
                       +{upcomingEvents.length - 1} more events scheduled soon
                     </p>
                   )}
                 </div>
               ) : (
                 <div className="mt-4 bg-gray-50 p-2 rounded-lg">
-                  <p className="text-gray-500 text-sm">No upcoming events</p>
+                  <p className="text-sm text-black">No upcoming events</p>
                 </div>
               )}
               
@@ -378,7 +378,7 @@ function AdminDashboard() {
                 <div className="p-3 rounded-full bg-amber-100 mr-4">
                   <FiTarget className="text-amber-600 text-xl" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800">Quick Actions</h3>
+                <h3 className="font-semibold text-black">Quick Actions</h3>
               </div>
               
               <div className="space-y-3">
@@ -386,21 +386,21 @@ function AdminDashboard() {
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors">
                     <FiUser className="text-blue-600" />
                   </div>
-                  <span className="text-gray-700">Add New Student</span>
+                  <span className="text-black">Add New Student</span>
                 </Link>
                 
                 <Link to="/Admin/AdminTeacher" className="flex items-center p-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group">
                   <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
                     <FiUsers className="text-green-600" />
                   </div>
-                  <span className="text-gray-700">Manage Teachers</span>
+                  <span className="text-black">Manage Teachers</span>
                 </Link>
                 
                 <Link to="/Admin/Timetable" className="flex items-center p-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors group">
                   <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3 group-hover:bg-purple-200 transition-colors">
                     <FiCalendar className="text-purple-600" />
                   </div>
-                  <span className="text-gray-700">Schedule Classes</span>
+                  <span className="text-black">Schedule Classes</span>
                 </Link>
               </div>
             </div>
@@ -416,7 +416,7 @@ function AdminDashboard() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800 flex items-center">
+                <h3 className="font-semibold text-lg flex items-center">
                   <FiUsers className="mr-2 text-blue-600" /> Recent Students
                 </h3>
                 <Link to="/Admin/students" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
@@ -447,15 +447,15 @@ function AdminDashboard() {
                         />
                       </div>
                       <div className="flex-grow">
-                        <h4 className="font-medium text-gray-800">
+                        <h4 className="font-medium text-black">
                           {student.firstName} {student.lastName}
                         </h4>
                         <div className="flex items-center gap-4">
-                          <p className="text-sm text-gray-500">{student.email}</p>
+                          <p className="text-sm text-black">{student.email}</p>
                           <span className={`text-xs px-2 py-1 rounded-full ${
-                            student.status === 'active' ? 'bg-green-100 text-green-700' :
-                            student.status === 'suspended' ? 'bg-red-100 text-red-700' :
-                            'bg-blue-100 text-blue-700'
+                            student.status === 'active' ? 'bg-green-100' :
+                            student.status === 'suspended' ? 'bg-red-100' :
+                            'bg-blue-100'
                           }`}>
                             {student.status || 'Active'}
                           </span>
@@ -471,10 +471,10 @@ function AdminDashboard() {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <svg className="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-12 h-12 text-black mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
-                  <p className="text-gray-500">No students found</p>
+                  <p className="text-black">No students found</p>
                   <Link to="/Admin/students" className="mt-2 inline-block text-blue-600 hover:text-blue-800">
                     Add Students
                   </Link>
@@ -490,7 +490,7 @@ function AdminDashboard() {
           >
             <div className="p-6 border-b border-gray-100">
               <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-lg text-gray-800 flex items-center">
+                <h3 className="font-semibold text-lg flex items-center">
                   <FiCalendar className="mr-2 text-purple-600" /> Upcoming Events
                 </h3>
                 <Link to="/Admin/Timetable" className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-medium">
@@ -516,12 +516,12 @@ function AdminDashboard() {
                           <FiClock className="text-blue-600" />
                         </div>
                         <div>
-                          <p className="font-medium text-gray-800">{event.title}</p>
-                          <p className="text-sm text-gray-500">{formatEventDate(event.startTime)}</p>
+                          <p className="font-medium text-black">{event.title}</p>
+                          <p className="text-sm text-black">{formatEventDate(event.startTime)}</p>
                         </div>
                       </div>
                       {event.description && (
-                        <p className="text-sm text-gray-600 ml-13 pl-10">
+                        <p className="text-sm ml-13 pl-10">
                           {event.description.length > 100 
                             ? `${event.description.substring(0, 100)}...` 
                             : event.description}
@@ -532,10 +532,10 @@ function AdminDashboard() {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <svg className="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-12 h-12 text-black mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <p className="text-gray-500">No upcoming events</p>
+                  <p className="text-black">No upcoming events</p>
                   <Link to="/Admin/Timetable" className="mt-2 inline-block text-blue-600 hover:text-blue-800">
                     Schedule Events
                   </Link>
