@@ -110,6 +110,18 @@ export const updateUserInfo = createAsyncThunk(
           },
         }
       );
+      if (userData.ProfilePic) {
+        await axiosInstance.put(
+          "auth/updateProfile",
+          { ProfilePic: userData.ProfilePic },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
 
       const updatedData = response.data;
 

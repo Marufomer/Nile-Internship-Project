@@ -51,6 +51,7 @@ module.exports.signup = async (req, res) => {
             folder: "profile_school_managment_system",
             upload_preset: "upload",
           });
+          console.log(uploadResponse)
           profilePicUrl = uploadResponse.secure_url;
         } else {
           // Fallback for local development - store image data directly
@@ -188,7 +189,6 @@ module.exports.updateProfile = async (req, res) => {
           // Use Cloudinary if properly configured
           const uploadResponse = await Cloudinary.uploader.upload(ProfilePic, {
             folder: "profile_school_managment_system",
-            upload_preset: "upload",
             transformation: [{ quality: "auto" }],
             fetch_format: "auto",
           });
