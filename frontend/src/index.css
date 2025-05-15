@@ -16,16 +16,33 @@
     @apply min-h-screen transition-colors duration-300;
   }
 
-  /* Default dark text for dark mode */
-  html.dark p, 
-  html.dark h1, 
-  html.dark h2, 
-  html.dark h3, 
-  html.dark h4, 
-  html.dark h5, 
-  html.dark h6, 
-  html.dark span, 
-  html.dark div {
-    @apply text-black;
+  /* Sidebar: text is white in dark mode */
+  html.dark .sidebar,
+  html.dark .sidebar * {
+    @apply text-white;
   }
+
+  /* Top Navbar: text is white in dark mode */
+  html.dark .navbar,
+  html.dark .navbar * {
+    @apply text-white;
+  }
+
+  /* Loading screen: text is white in dark mode */
+  html.dark .loading-screen,
+  html.dark .loading-screen * {
+    @apply text-white;
+  }
+
+  /* Cards and other content: default text color in dark mode unless overridden */
+  html.dark .card,
+  html.dark .card * {
+    @apply text-white;
+  }
+
+  /* Prevent text from being forced black globally */
+  /* Remove this to avoid unexpected overrides */
+  /* html.dark body *:not(.sidebar):not(.loading-screen) {
+    color: #111 !important;
+  } */
 }

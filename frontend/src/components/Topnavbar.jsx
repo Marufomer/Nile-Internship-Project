@@ -82,12 +82,12 @@ function TopNavbar() {
   };
 
   return (
-    <div className='bg-white dark:bg-gray-800 shadow-md z-50 fixed top-0 left-0 right-0'>
+    <div className={darkMode ? 'bg-gray-800 shadow-md z-50 fixed top-0 left-0 right-0' : 'bg-white shadow-md z-50 fixed top-0 left-0 right-0'}>
       <nav className='w-full h-12 flex items-center justify-between px-2 sm:px-3'>
         {/* Left side - Welcome message */}
         <div className="pl-1">
           <motion.h1 
-            className='text-sm sm:text-base md:text-lg font-semibold text-black dark:text-white truncate max-w-[120px] sm:max-w-[180px] md:max-w-none'
+            className={darkMode ? 'text-sm sm:text-base md:text-lg font-semibold text-white truncate max-w-[120px] sm:max-w-[180px] md:max-w-none' : 'text-sm sm:text-base md:text-lg font-semibold text-black truncate max-w-[120px] sm:max-w-[180px] md:max-w-none'}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -101,7 +101,7 @@ function TopNavbar() {
           {/* Theme Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className='p-1 text-black dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
+            className={darkMode ? 'p-1 text-white hover:text-gray-200 hover:bg-gray-700 rounded-full transition-colors' : 'p-1 text-black hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors'}
           >
             {darkMode ? <FiSun className="text-lg" /> : <FiMoon className="text-lg" />}
           </button>
@@ -111,15 +111,15 @@ function TopNavbar() {
             <input 
               type="text" 
               placeholder="Search..." 
-              className="py-1 pl-8 pr-2 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+              className={darkMode ? 'py-1 pl-8 pr-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm text-white placeholder-gray-400' : 'py-1 pl-8 pr-2 bg-gray-100 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm text-black placeholder-gray-500'}
             />
-            <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black dark:text-gray-400" />
+            <FiSearch className={darkMode ? 'absolute left-2 top-1/2 transform -translate-y-1/2 text-white' : 'absolute left-2 top-1/2 transform -translate-y-1/2 text-black'} />
           </div>
           
           {/* Notifications */}
           <div className="relative" ref={notificationRef}>
             <button 
-              className='relative p-1 text-black dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors'
+              className={darkMode ? 'relative p-1 text-white hover:text-gray-200 hover:bg-gray-700 rounded-full transition-colors' : 'relative p-1 text-black hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors'}
               onClick={toggleNotifications}
             >
               <FiBell className="text-lg" />
@@ -153,8 +153,8 @@ function TopNavbar() {
                 />
               </div>
               <div className='hidden md:block text-left'>
-                <h2 className='text-black dark:text-white font-medium text-xs sm:text-sm'>{getDisplayName()}</h2>
-                <p className='text-gray-600 dark:text-gray-400 text-xs'>{getUserRole()}</p>
+                <h2 className={darkMode ? 'text-white font-medium text-xs sm:text-sm' : 'text-black font-medium text-xs sm:text-sm'}>{getDisplayName()}</h2>
+                <p className={darkMode ? 'text-gray-200 text-xs' : 'text-gray-600 text-xs'}>{getUserRole()}</p>
               </div>
             </button>
             
@@ -162,22 +162,22 @@ function TopNavbar() {
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.div 
-                  className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50 border border-gray-100 dark:border-gray-700'
+                  className={darkMode ? 'absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg py-2 z-50 border border-gray-700' : 'absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100'}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/account`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
-                    <FiUser className="mr-3 text-gray-500 dark:text-gray-400" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/account`} className={darkMode ? 'flex items-center px-4 py-2 text-white hover:bg-gray-700 transition-colors' : 'flex items-center px-4 py-2 text-black hover:bg-gray-100 transition-colors'}>
+                    <FiUser className={darkMode ? 'mr-3 text-gray-200' : 'mr-3 text-gray-500'} />
                     My Profile
                   </Link>
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/settings`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
-                    <FiSettings className="mr-3 text-gray-500 dark:text-gray-400" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/settings`} className={darkMode ? 'flex items-center px-4 py-2 text-white hover:bg-gray-700 transition-colors' : 'flex items-center px-4 py-2 text-black hover:bg-gray-100 transition-colors'}>
+                    <FiSettings className={darkMode ? 'mr-3 text-gray-200' : 'mr-3 text-gray-500'} />
                     Settings
                   </Link>
-                  <Link to={`/${Authuser?.role?.toLowerCase()}/notifications`} className='flex items-center px-4 py-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
-                    <FiBell className="mr-3 text-gray-500 dark:text-gray-400" />
+                  <Link to={`/${Authuser?.role?.toLowerCase()}/notifications`} className={darkMode ? 'flex items-center px-4 py-2 text-white hover:bg-gray-700 transition-colors' : 'flex items-center px-4 py-2 text-black hover:bg-gray-100 transition-colors'}>
+                    <FiBell className={darkMode ? 'mr-3 text-gray-200' : 'mr-3 text-gray-500'} />
                     Notifications
                     {unreadCount > 0 && (
                       <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
@@ -185,10 +185,10 @@ function TopNavbar() {
                       </span>
                     )}
                   </Link>
-                  <hr className='my-1 border-gray-100 dark:border-gray-700' />
+                  <hr className={darkMode ? 'my-1 border-gray-700' : 'my-1 border-gray-100'} />
                   <button 
                     onClick={handleLogout}
-                    className='w-full flex items-center px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors'
+                    className={darkMode ? 'w-full flex items-center px-4 py-2 text-red-400 hover:bg-red-900/20 transition-colors' : 'w-full flex items-center px-4 py-2 text-red-600 hover:bg-red-50 transition-colors'}
                   >
                     <FiLogOut className="mr-3" />
                     Logout
@@ -199,7 +199,7 @@ function TopNavbar() {
           </div>
         </div>
       </nav>
-      <hr className='border-gray-200 dark:border-gray-700' />
+      <hr className={darkMode ? 'border-gray-700' : 'border-gray-200'} />
     </div>
   );
 }
