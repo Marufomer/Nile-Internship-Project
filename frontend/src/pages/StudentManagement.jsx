@@ -25,6 +25,7 @@ const StudentManagement = () => {
 
   useEffect(() => {
     dispatch(fetchAllStudents());
+    
   }, [dispatch]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const StudentManagement = () => {
       .unwrap()
       .then(() => {
         setShowAddModal(false);
+        window.location.reload();
       })
       .catch((error) => {
         toast.error(error || "Failed to add student");
@@ -88,6 +90,7 @@ const StudentManagement = () => {
     setCurrentStudent(student);
     setShowEditModal(true);
   };
+  console.log(students);
 
   return (
     <div className="block">

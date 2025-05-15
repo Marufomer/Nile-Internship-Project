@@ -1,80 +1,79 @@
-const Student=require('../model/Studentmodel');
+const Student = require("../model/Studentmodel");
 const Grade = require("../model/Grade");
+const cloudinary = require("../lib/Cloudinary");
 
+module.exports.UpdateProfile = async (req, res) => {
 
-
-module.exports.UpdateProfile=async(req,res)=>{
+  const ProfilePic = req.file;
   try {
-      const userId = req.user?._id;
-      const { firstName, lastName, email, phone,Address,Dateofbirth,gender} = req.body;
+    const userId = req.user?._id;
+    const { firstName, lastName, email, phone, Address, Dateofbirth, gender } =
+      req.body;
 
-      if (!firstName || !lastName || !email  ||!Address|| !Dateofbirth|| !gender) {
-          return res
-            .status(400)
-            .json({ error: "Please provide all neccessary information" });
-        }
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !Address ||
+      !Dateofbirth ||
+      !gender
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Please provide all neccessary information" });
+    }
+
+    
+    const newStudent = new Student({
+      firstName,
+      lastName,
+      email,
+      phone,
+      Address,
+      Dateofbirth,
+      gender,
+    });
 
 
-      /*  if (ProfilePic) {
-          try {
-            const uploadResponse = await Cloundinary.uploader.upload(ProfilePic, {
-              folder: "profile_school_managment_system",
+    await newStudent.save();
+
+    if (ProfilePic) {
+      if (req.file) {
+        await new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            {
+              folder: "profile_school_management_system",
               upload_preset: "upload",
-            });
-    
-            const updatedUser = await User.findOneAndUpdate(
-              { _id: userId },
-              { ProfilePic: uploadResponse.secure_url },
-              { new: true }
-            );
-    
-            if (!updatedUser) {
-              return res.status(404).json({ message: "User not found" });
+            },
+            async (error, result) => {
+              if (error) {
+                console.error("Cloudinary upload failed:", error);
+                return reject(error);
+              }
+
+              newStudent.profileImage = result.secure_url;
+              await newStudent.save();
+              resolve();
             }
-    
-            return res.status(200).json({
-              message: "Profile updated successfully",
-              updatedUser,
-            });
-          } catch (cloudinaryError) {
-            console.error("Cloudinary upload failed:", cloudinaryError);
-            return res.status(500).json({
-              message: "Image upload failed",
-              error: cloudinaryError.message,
-            });
-          }
-        } */
-
-
-
-        const newStudent = new Student({
-          firstName,
-          lastName,
-          email,
-          phone,
-          Address,
-          Dateofbirth,
-          gender, 
-         
-           
-         
+          );
+          stream.end(req.file.buffer);
         });
-
-      await newStudent.save();
-        
-    
-        res.status(201).json({
-          message: "Student profile created successfully",
-        });
+      }
+    }
 
 
-
+    res.status(201).json({
+      message: "Student profile created successfully",
+    });
   } catch (error) {
-  console.error("Error during creating Student profile:", error.message);
-  res.status(400).json({ error: "Error during creating Student profile: " + error.message });
+    console.error("Error during creating Student profile:", error.message);
+    res
+      .status(400)
+      .json({
+        error: "Error during creating Student profile: " + error.message,
+      });
   }
-}
-
+};
 
 exports.DeleteProfile = async (req, res) => {
   try {
@@ -97,20 +96,20 @@ exports.DeleteProfile = async (req, res) => {
   }
 };
 
-module.exports.getallStudents=async(req,res)=>{
+module.exports.getallStudents = async (req, res) => {
   try {
-    const allStudents = await Student.find()
-    res.json(allStudents);
+    const allStudents = await Student.find();
+    res.json({ students: allStudents });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+};
 
 exports.GetAcadamicRecords = async (req, res) => {
   try {
     const { userId } = req.params;
-    const  Studentinfo = await  Student.findById(userId);
-    if (! Studentinfo) {
+    const Studentinfo = await Student.findById(userId);
+    if (!Studentinfo) {
       return res.status(404).json({
         message: "User not found",
       });
