@@ -18,6 +18,7 @@ import AdminTeacher from './pages/AdminTeacher';
 import Adminpage from './pages/Adminpage'
 import TimeTable from './features/TimeTable';
 import TeachersAssignmentpage from "./pages/TeachersAssignmentpage"
+import TeacherClass from "./pages/TeacherClass"
 import FeePage from './pages/FeePage';
 import StudentManagement from './pages/StudentManagement';
 import AccountSettings from './pages/AccountSettings';
@@ -92,6 +93,7 @@ function App() {
           <Route path='notifications' element={<Notificationpage />} />
           <Route path='Attendancepage' element={<Attendancepage/>}/>
           <Route path='TeacherSubject' element={<TeacherSubject/>}/>
+          <Route path='classes' element={<TeacherClass/>}/>
         </Route>
 
         <Route path='/Admin' element={<Adminpage/>}>

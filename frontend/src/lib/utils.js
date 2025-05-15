@@ -8,7 +8,9 @@
  */
 export const getSafeUserData = () => {
   try {
-    const userData = localStorage.getItem('user');
+    // Check if we should use sessionStorage (not remembered) or localStorage (remembered)
+    const storage = getRememberMePreference() ? localStorage : sessionStorage;
+    const userData = storage.getItem('user');
     if (!userData) return null;
     
     const parsedData = JSON.parse(userData);
@@ -28,16 +30,19 @@ export const getSafeUserData = () => {
     // Clear invalid data
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     return null;
   }
 };
 
 /**
- * Safely stores user data in localStorage
+ * Safely stores user data in localStorage or sessionStorage based on remember me preference
  * @param {Object} userData User data to store
+ * @param {boolean} rememberMe Whether to remember the user across browser sessions
  * @returns {boolean} Success status
  */
-export const storeUserData = (userData) => {
+export const storeUserData = (userData, rememberMe = false) => {
   try {
     if (!userData) {
       console.error('Attempted to store empty user data');
@@ -54,29 +59,56 @@ export const storeUserData = (userData) => {
       userDataToStore.ProfilePic = existingUserData.ProfilePic;
     }
     
-    // Store user data in localStorage
-    localStorage.setItem('user', JSON.stringify(userDataToStore));
+    // Store remember me preference
+    setRememberMePreference(rememberMe);
+    
+    // Use appropriate storage based on remember me preference
+    const storage = rememberMe ? localStorage : sessionStorage;
+    
+    // Store user data in storage
+    storage.setItem('user', JSON.stringify(userDataToStore));
     
     // Store token separately if provided
     if (userDataToStore.token) {
-      localStorage.setItem('token', userDataToStore.token);
+      storage.setItem('token', userDataToStore.token);
     }
     
     console.log('User data stored successfully:', userDataToStore);
     return true;
   } catch (error) {
-    console.error('Error storing user data in localStorage:', error);
+    console.error('Error storing user data in storage:', error);
     return false;
   }
 };
 
 /**
- * Clears all auth-related data from localStorage
+ * Sets the remember me preference
+ * @param {boolean} remember Whether to remember the user
+ */
+export const setRememberMePreference = (remember) => {
+  localStorage.setItem('rememberMe', remember ? 'true' : 'false');
+};
+
+/**
+ * Gets the remember me preference
+ * @returns {boolean} Whether to remember the user
+ */
+export const getRememberMePreference = () => {
+  const rememberMeValue = localStorage.getItem('rememberMe');
+  // Explicitly check for the string 'true', otherwise return false
+  return rememberMeValue === 'true';
+};
+
+/**
+ * Clears all auth-related data from localStorage and sessionStorage
  */
 export const clearAuthData = () => {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
   localStorage.removeItem('authUser');
+  sessionStorage.removeItem('user');
+  sessionStorage.removeItem('token');
+  // Don't clear rememberMe preference
 };
 
 /**

@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import Google from "../assets/icons8-google.svg";
 import CampanyLogo from '../assets/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from "../features/Authentication";
+import { login, setRememberMe } from "../features/Authentication";
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import toast from 'react-hot-toast';
-import { normalizeRole, getRedirectPathByRole } from "../lib/utils";
+import { normalizeRole, getRedirectPathByRole, getRememberMePreference } from "../lib/utils";
 import AuthNavbar from "../components/AuthNavbar";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMeState] = useState(getRememberMePreference() || false);
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState("");
   const dispatch = useDispatch();
@@ -75,6 +75,13 @@ const Login = () => {
     return isValid;
   };
 
+  const handleRememberMeChange = (e) => {
+    const isChecked = e.target.checked;
+    console.log('Remember me checkbox changed:', isChecked);
+    setRememberMeState(isChecked);
+    dispatch(setRememberMe(isChecked));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -82,7 +89,8 @@ const Login = () => {
     setLoginError("");
     
     try {
-      const resultAction = await dispatch(login({ email, password }));
+      console.log('Remember me value before login dispatch:', rememberMe);
+      const resultAction = await dispatch(login({ email, password, rememberMe }));
       
       if (login.fulfilled.match(resultAction)) {
         // Login successful
@@ -216,7 +224,7 @@ const Login = () => {
                       id="remember-me"
                       type="checkbox"
                       checked={rememberMe}
-                      onChange={() => setRememberMe(!rememberMe)}
+                      onChange={handleRememberMeChange}
                       className="h-4 w-4 border-gray-600 rounded bg-gray-700 focus:ring-green-400"
                     />
                     <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
@@ -249,33 +257,28 @@ const Login = () => {
                     ) : "Sign In"}
                   </motion.button>
                 </motion.div>
+
+                {/* Google Login Button */}
+                <motion.div variants={itemVariants} className="mt-4">
+                  <button
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    className="w-full flex items-center justify-center bg-gray-700/70 hover:bg-gray-700 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg transition-all duration-300"
+                  >
+                    <img src={Google} alt="Google" className="h-5 w-5 mr-2" />
+                    Sign in with Google
+                  </button>
+                </motion.div>
+
+                <motion.div variants={itemVariants} className="mt-6 text-center">
+                  <p className="text-gray-400 text-sm">
+                    Don't have an account?{" "}
+                    <Link to="/register" className="text-green-400 hover:text-green-300 font-medium">
+                      Sign up
+                    </Link>
+                  </p>
+                </motion.div>
               </form>
-
-              <motion.div variants={itemVariants} className="mt-5 sm:mt-6 text-center">
-                <p className="text-gray-400 text-sm">
-                  Don't have an account?{" "}
-                  <Link to="/register" className="text-green-400 hover:text-green-300 font-medium">
-                    Sign Up
-                  </Link>
-                </p>
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <div className="mt-5 sm:mt-6 flex items-center">
-                  <div className="flex-grow h-px bg-gray-700"></div>
-                  <div className="mx-4 text-sm text-gray-500">OR</div>
-                  <div className="flex-grow h-px bg-gray-700"></div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleGoogleLogin}
-                  className="w-full mt-4 flex items-center justify-center bg-gray-700/50 hover:bg-gray-700/70 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg border border-gray-600 transition-colors duration-300"
-                >
-                  <img src={Google} alt="Google" className="w-5 h-5 mr-2" />
-                  Continue with Google
-                </button>
-              </motion.div>
             </div>
           </div>
         </motion.div>

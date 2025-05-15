@@ -238,7 +238,7 @@ function Sidebar({ isOpen, setIsOpen }) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <Link to="/teacher/assignments" className="flex items-center space-x-3 text-md hover:text-yellow-300 py-1 px-2 rounded-md transition-colors">
+                        <Link to="/teacher/TeachersAssignmentpage" className="flex items-center space-x-3 text-md hover:text-yellow-300 py-1 px-2 rounded-md transition-colors">
                           <MdAssignmentTurnedIn className="text-lg text-yellow-300" />
                           <span>Assignments</span>
                         </Link>
@@ -248,9 +248,19 @@ function Sidebar({ isOpen, setIsOpen }) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                       >
-                        <Link to="/teacher/TeachersAssignmentpage" className="flex items-center space-x-3 text-md hover:text-yellow-300 py-1 px-2 rounded-md transition-colors">
-                          <FaCalendarAlt className="text-lg text-yellow-300" />
-                          <span>Schedule</span>
+                        <Link to="/teacher/Attendancepage" className="flex items-center space-x-3 text-md hover:text-yellow-300 py-1 px-2 rounded-md transition-colors">
+                          <BsClipboardData className="text-lg text-yellow-300" />
+                          <span>Attendance</span>
+                        </Link>
+                      </motion.li>
+                      <motion.li 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        <Link to="/teacher/classes" className="flex items-center space-x-3 text-md hover:text-yellow-300 py-1 px-2 rounded-md transition-colors">
+                          <FaChalkboardTeacher className="text-lg text-yellow-300" />
+                          <span>Class Management</span>
                         </Link>
                       </motion.li>
                     </motion.ul>
@@ -266,15 +276,6 @@ function Sidebar({ isOpen, setIsOpen }) {
                 active={isActive('TeacherSubject')} 
                 onHover={() => setHoveredItem('subjects')}
                 isHovered={hoveredItem === 'subjects'}
-              />
-              <NavLink 
-                to="/teacher/Attendancepage" 
-                icon={<MdAssignmentTurnedIn />} 
-                title="Attendance" 
-                isOpen={isOpen} 
-                active={isActive('Attendancepage')}
-                onHover={() => setHoveredItem('attendance')}
-                isHovered={hoveredItem === 'attendance'}
               />
               <NavLink 
                 to="/teacher/timetable" 
@@ -308,6 +309,15 @@ function Sidebar({ isOpen, setIsOpen }) {
                 active={isActive('courses')}
                 onHover={() => setHoveredItem('courses')}
                 isHovered={hoveredItem === 'courses'}
+              />
+              <NavLink 
+                to="/student/assignments" 
+                icon={<MdAssignmentTurnedIn />} 
+                title="Assignments" 
+                isOpen={isOpen} 
+                active={isActive('assignments')}
+                onHover={() => setHoveredItem('assignments')}
+                isHovered={hoveredItem === 'assignments'}
               />
               <NavLink 
                 to="/student/timetable" 
