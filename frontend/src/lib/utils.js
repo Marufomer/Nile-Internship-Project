@@ -44,6 +44,8 @@ export const getSafeUserData = () => {
  */
 export const storeUserData = (userData, rememberMe = false) => {
   try {
+    console.log('storeUserData called with rememberMe:', rememberMe);
+    
     if (!userData) {
       console.error('Attempted to store empty user data');
       return false;
@@ -64,6 +66,7 @@ export const storeUserData = (userData, rememberMe = false) => {
     
     // Use appropriate storage based on remember me preference
     const storage = rememberMe ? localStorage : sessionStorage;
+    console.log('Using storage:', rememberMe ? 'localStorage' : 'sessionStorage');
     
     // Store user data in storage
     storage.setItem('user', JSON.stringify(userDataToStore));
@@ -86,6 +89,7 @@ export const storeUserData = (userData, rememberMe = false) => {
  * @param {boolean} remember Whether to remember the user
  */
 export const setRememberMePreference = (remember) => {
+  console.log('Setting rememberMe preference to:', remember);
   localStorage.setItem('rememberMe', remember ? 'true' : 'false');
 };
 
@@ -96,18 +100,22 @@ export const setRememberMePreference = (remember) => {
 export const getRememberMePreference = () => {
   const rememberMeValue = localStorage.getItem('rememberMe');
   // Explicitly check for the string 'true', otherwise return false
-  return rememberMeValue === 'true';
+  const result = rememberMeValue === 'true';
+  console.log('getRememberMePreference called, value from storage:', rememberMeValue, 'returning:', result);
+  return result;
 };
 
 /**
  * Clears all auth-related data from localStorage and sessionStorage
  */
 export const clearAuthData = () => {
+  console.log('Clearing auth data');
   localStorage.removeItem('user');
   localStorage.removeItem('token');
   localStorage.removeItem('authUser');
   sessionStorage.removeItem('user');
   sessionStorage.removeItem('token');
+  console.log('Auth data cleared, rememberMe preference preserved');
   // Don't clear rememberMe preference
 };
 
