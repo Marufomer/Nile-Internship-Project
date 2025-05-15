@@ -33,9 +33,14 @@ export const addTimetable = createAsyncThunk(
     'Timetable/createTimetable',
     async (TimetableData, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post("Timetable/createTimetable", TimetableData, { withCredentials: true });
+            const response = await axiosInstance.post(
+              "Timetable/createTimetable",
+              TimetableData,
+              { withCredentials: true }
+            );
             return response.data;
         } catch (error) {
+            console.log(error)
             return rejectWithValue(error.response?.data?.message || "Failed to add Timetable");
         }
     }

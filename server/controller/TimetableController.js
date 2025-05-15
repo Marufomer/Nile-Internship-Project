@@ -2,6 +2,7 @@ const Timetable = require('../model/Timetablemodel');
 
 
 module.exports.createTimetable = async (req, res) => {
+  console.log(req.body);
   try {
     const {  subjectId,teacherId,startTime,endTime} = req.body;
 

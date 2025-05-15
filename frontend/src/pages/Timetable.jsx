@@ -52,8 +52,8 @@ const Timetable = () => {
     const startDate = info.event.start.toISOString().slice(0, 16);
     const endDate = info.event.end ? info.event.end.toISOString().slice(0, 16) : '';
     
-    setValue("title", info.event.title);
-    setValue("description", info.event.extendedProps.description || "");
+    setValue("subjectId", info.event.extendedProps.subjectId);
+    setValue("teacherId", info.event.extendedProps.teacherId);
     setValue("startTime", startDate);
     setValue("endTime", endDate);
     
@@ -62,33 +62,23 @@ const Timetable = () => {
 
   // Handle form submission
   const onSubmit = (data) => {
+    const payload = {
+      subjectId: data.subjectId,
+      teacherId: data.teacherId,
+      startTime: new Date(data.startTime).toISOString(),
+      endTime: new Date(data.endTime).toISOString(),
+    };
+
     if (isEditMode && selectedEvent) {
-      // Update existing event
-      const updatedEvent = {
-        id: selectedEvent.id,
-        updatedData: {
-          title: data.title,
-          description: data.description,
-          startTime: new Date(data.startTime).toISOString(),
-          endTime: new Date(data.endTime).toISOString(),
-        }
-      };
-      dispatch(updateTimetable(updatedEvent));
+      dispatch(updateTimetable({ id: selectedEvent.id, updatedData: payload }));
     } else {
-      // Create new event
-      const newEvent = {
-        title: data.title,
-        description: data.description,
-        startTime: new Date(data.startTime).toISOString(),
-        endTime: new Date(data.endTime).toISOString(),
-      };
-      dispatch(addTimetable(newEvent));
+      dispatch(addTimetable(payload));
     }
-    
+
     setIsModalOpen(false);
     reset();
   };
-
+  
   // Handle event deletion
   const handleDeleteEvent = () => {
     if (selectedEvent) {
@@ -98,16 +88,17 @@ const Timetable = () => {
     }
   };
 
-  const convertToFullCalendarEvent = (timetable) => {
-    return {
-      id: timetable._id,
-      title: timetable.title || "Untitled Event",
-      start: new Date(timetable.startTime),
-      end: new Date(timetable.endTime),
-      description: timetable.description || "",
-      allDay: false,
-    };
-  };
+  const convertToFullCalendarEvent = (timetable) => ({
+    id: timetable._id,
+    title: timetable.subjectId?.name || "Untitled", // display purpose
+    start: new Date(timetable.startTime),
+    end: new Date(timetable.endTime),
+    extendedProps: {
+      subjectId: timetable.subjectId?._id || timetable.subjectId,
+      teacherId: timetable.teacherId?._id || timetable.teacherId,
+    },
+  });
+  
 
   const events = Timetables?.map(convertToFullCalendarEvent) || [];
 
@@ -117,7 +108,7 @@ const Timetable = () => {
 
       <div className="m-5 p-4 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4">Class Timetable</h1>
-        
+
         {isTimetablesLoading ? (
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -153,35 +144,50 @@ const Timetable = () => {
             </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Title</label>
+                <label className="block text-gray-700 mb-2">Subject ID</label>
                 <input
                   type="text"
-                  {...register("title", { required: "Title is required" })}
+                  {...register("subjectId", {
+                    required: "Subject ID is required",
+                  })}
                   className="w-full p-2 border rounded"
                 />
-                {errors.title && (
-                  <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+                {errors.subjectId && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.subjectId.message}
+                  </p>
                 )}
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Description</label>
-                <textarea
-                  {...register("description")}
+                <label className="block text-gray-700 mb-2">Teacher ID</label>
+                <input
+                  type="text"
+                  {...register("teacherId", {
+                    required: "Teacher ID is required",
+                  })}
                   className="w-full p-2 border rounded"
-                  rows="3"
-                ></textarea>
+                />
+                {errors.teacherId && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.teacherId.message}
+                  </p>
+                )}
               </div>
 
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Start Time</label>
                 <input
                   type="datetime-local"
-                  {...register("startTime", { required: "Start time is required" })}
+                  {...register("startTime", {
+                    required: "Start time is required",
+                  })}
                   className="w-full p-2 border rounded"
                 />
                 {errors.startTime && (
-                  <p className="text-red-500 text-sm mt-1">{errors.startTime.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.startTime.message}
+                  </p>
                 )}
               </div>
 
@@ -193,7 +199,9 @@ const Timetable = () => {
                   className="w-full p-2 border rounded"
                 />
                 {errors.endTime && (
-                  <p className="text-red-500 text-sm mt-1">{errors.endTime.message}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.endTime.message}
+                  </p>
                 )}
               </div>
 
