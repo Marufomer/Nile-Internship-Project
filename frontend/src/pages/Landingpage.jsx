@@ -78,7 +78,10 @@ function Landingpage() {
     hover: {
       scale: 1.02,
       boxShadow: "0 10px 40px -15px rgba(0, 0, 0, 0.1)",
-      backgroundColor: "#1f2937",
+      backgroundColor: "#f3f4f6",
+      dark: {
+        backgroundColor: "#1f2937"
+      },
       transition: { type: "spring", stiffness: 300, damping: 20 }
     }
   };
@@ -244,7 +247,8 @@ function Landingpage() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 min-h-screen">
+    <div className="min-h-screen bg-gray-100 text-gray-800 dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white transition-colors duration-300">
+      <Header />
       {/* Animated background elements */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Large animated gradient orbs */}
@@ -321,8 +325,6 @@ function Landingpage() {
         ))}
       </div>
       
-      <Header />
-
       <div className="relative z-10">
         {/* Hero Section */}
         <motion.section
@@ -333,14 +335,14 @@ function Landingpage() {
           viewport={{ once: true }}
         >
           <div className="w-full md:w-1/2">
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-black dark:text-white mb-6">
               The Future of Smart School Management
               <br />
               <span className="block mt-2">
                 System Is <span className="text-green-400">Here.</span>
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-6">
+            <p className="text-lg md:text-xl text-black dark:text-gray-300 mb-6">
               Revolutionizing education with cutting-edge technology
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -375,7 +377,7 @@ function Landingpage() {
           >
             {/* Animated heading */}
             <motion.h2 
-              className="text-4xl font-bold text-center mb-4 text-white"
+              className="text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white"
               variants={textVariants}
               initial="hidden"
               whileInView="visible"
@@ -410,10 +412,10 @@ function Landingpage() {
                   whileInView="visible"
                   whileHover="hover"
                   viewport={{ once: true, margin: "-50px" }}
-                  className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-700/50 text-center transition-all duration-300 hover:border-green-400/30"
+                  className="bg-gray-200/50 dark:bg-gray-800/50 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-gray-300/50 dark:border-gray-700/50 text-center transition-all duration-300 hover:border-green-400/30"
                 >
                   <motion.div 
-                    className="bg-gradient-to-br from-gray-700 to-gray-800 p-5 rounded-full mb-6 mx-auto flex justify-center items-center w-20 h-20 border border-gray-600"
+                    className="bg-gradient-to-br from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-800 p-5 rounded-full mb-6 mx-auto flex justify-center items-center w-20 h-20 border border-gray-400 dark:border-gray-600"
                     whileHover={{ 
                       rotate: [0, 10, -10, 10, 0],
                       transition: { duration: 0.5 }
@@ -421,10 +423,7 @@ function Landingpage() {
                   >
                     {feature.icon}
                   </motion.div>
-                  <h3 className="text-xl font-bold mb-3 text-white">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-300">{feature.description}</p>
+                                                          <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">                      {feature.title}                    </h3>                    <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -440,7 +439,7 @@ function Landingpage() {
           >
             {/* Animated heading */}
             <motion.h2 
-              className="text-4xl font-bold text-center mb-4 text-white"
+              className="text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white"
               variants={textVariants}
               initial="hidden"
               whileInView="visible"
@@ -466,7 +465,7 @@ function Landingpage() {
             />
             
             <motion.p 
-              className="text-center text-gray-300 mb-16 max-w-2xl mx-auto"
+              className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -500,12 +499,12 @@ function Landingpage() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
-                    className="relative bg-gray-800/60 backdrop-blur-sm p-8 pt-10 rounded-2xl m-4 border border-gray-700/50 overflow-hidden"
+                    className="relative bg-gray-200/60 dark:bg-gray-800/60 backdrop-blur-sm p-8 pt-10 rounded-2xl m-4 border border-gray-300/50 dark:border-gray-700/50 overflow-hidden"
                     style={{
-                      boxShadow: "0 20px 60px -10px rgba(0, 0, 0, 0.5), 0 8px 24px -12px rgba(0, 0, 0, 0.4)"
+                      boxShadow: "0 20px 60px -10px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.2)"
                     }}
                     whileHover={{
-                      boxShadow: "0 30px 70px -10px rgba(0, 0, 0, 0.6), 0 20px 40px -15px rgba(0, 0, 0, 0.5)",
+                      boxShadow: "0 30px 70px -10px rgba(0, 0, 0, 0.4), 0 20px 40px -15px rgba(0, 0, 0, 0.3)",
                       y: -5,
                       borderColor: "rgba(74, 222, 128, 0.3)",
                       transition: { duration: 0.3, type: "spring", stiffness: 150 }
@@ -538,7 +537,7 @@ function Landingpage() {
                       ))}
                     </div>
                     
-                    <p className="relative z-10 text-gray-300 italic mb-6">
+                    <p className="relative z-10 text-gray-600 dark:text-gray-300 italic mb-6">
                       "This system is intuitive, reliable, and transformed how
                       we manage education. The features are comprehensive and the support is excellent."
                     </p>
@@ -554,8 +553,8 @@ function Landingpage() {
                         />
                       </motion.div>
                       <div className="ml-4">
-                        <p className="font-semibold text-white">Sarah Johnson</p>
-                        <p className="text-sm text-gray-400">School Principal, Lincoln Academy</p>
+                        <p className="font-semibold text-gray-800 dark:text-white">Sarah Johnson</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">School Principal, Lincoln Academy</p>
                       </div>
                     </div>
                   </motion.div>
@@ -573,7 +572,7 @@ function Landingpage() {
           >
             {/* Animated Heading */}
             <motion.h2 
-              className="text-4xl font-bold text-center mb-4 text-white"
+              className="text-4xl font-bold text-center mb-4 text-black dark:text-white"
               variants={textVariants}
               initial="hidden"
               whileInView="visible"
@@ -599,7 +598,7 @@ function Landingpage() {
             />
             
             <motion.p 
-              className="text-center text-gray-300 mb-12 max-w-2xl mx-auto"
+              className="text-center text-black dark:text-gray-300 mb-12 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -621,7 +620,7 @@ function Landingpage() {
                   custom={idx}
                   variants={faqItemVariants}
                   whileHover="hover"
-                  className="bg-gray-800/60 backdrop-blur-sm p-6 rounded-xl shadow-lg overflow-hidden border border-gray-700/50 border-l-4 border-l-green-500"
+                  className="bg-gray-200/60 dark:bg-gray-800/60 backdrop-blur-sm p-6 rounded-xl shadow-lg overflow-hidden border border-gray-300/50 dark:border-gray-700/50 border-l-4 border-l-green-500"
                 >
                   <div
                     className="flex items-center cursor-pointer"
@@ -629,7 +628,7 @@ function Landingpage() {
                   >
                     {/* Icon container with animated background */}
                     <motion.div 
-                      className="bg-gray-700 p-3 rounded-full mr-4 flex-shrink-0"
+                      className="bg-gray-300 dark:bg-gray-700 p-3 rounded-full mr-4 flex-shrink-0"
                       whileHover={{ 
                         scale: 1.1,
                         backgroundColor: "rgba(74, 222, 128, 0.2)",
@@ -649,7 +648,7 @@ function Landingpage() {
                     </motion.div>
                     
                     {/* Question */}
-                    <h3 className="text-lg font-semibold text-white flex-grow">
+                    <h3 className="text-lg font-semibold text-black dark:text-white flex-grow">
                       {item.q}
                     </h3>
                     
@@ -657,13 +656,13 @@ function Landingpage() {
                     <motion.div
                       animate={activeIndex === idx ? 
                         { rotate: 180, backgroundColor: "rgba(74, 222, 128, 0.2)" } : 
-                        { rotate: 0, backgroundColor: "rgba(55, 65, 81, 1)" }
+                        { rotate: 0, backgroundColor: activeIndex === idx ? "rgba(74, 222, 128, 0.2)" : "rgba(209, 213, 219, 1)" }
                       }
-                      className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 ml-4"
+                      className="w-8 h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center flex-shrink-0 ml-4"
                     >
                       {activeIndex === idx ? 
                         <FaAngleUp className="text-green-400" /> : 
-                        <FaAngleDown className="text-gray-400" />
+                        <FaAngleDown className="text-black dark:text-gray-400" />
                       }
                     </motion.div>
                   </div>
@@ -684,7 +683,7 @@ function Landingpage() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, delay: 0.1 }}
                         >
-                          <div className="mt-2 text-gray-300 bg-gradient-to-r from-green-900/30 to-blue-900/30 p-4 rounded-lg border-l-2 border-green-500/50 flex items-start">
+                          <div className="mt-2 text-black dark:text-gray-300 bg-gradient-to-r from-green-900/10 to-blue-900/10 dark:from-green-900/30 dark:to-blue-900/30 p-4 rounded-lg border-l-2 border-green-500/50 flex items-start">
                             <FaLightbulb className="text-green-400 mr-3 mt-1 flex-shrink-0" />
                             <p>{item.a}</p>
                           </div>

@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Default dark mode styles */
+@layer base {
+  html.dark {
+    @apply bg-gray-900 text-white;
+  }
+
+  html {
+    @apply bg-gray-100 text-gray-800;
+  }
+
+  body {
+    @apply min-h-screen transition-colors duration-300;
+  }
+
+  /* Default dark text for dark mode */
+  html.dark p, 
+  html.dark h1, 
+  html.dark h2, 
+  html.dark h3, 
+  html.dark h4, 
+  html.dark h5, 
+  html.dark h6, 
+  html.dark span, 
+  html.dark div {
+    @apply text-white;
+  }
+}

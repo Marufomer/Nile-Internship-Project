@@ -219,7 +219,7 @@ function TeacherClass() {
       toast.success('Activity deleted successfully');
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-100">
       <TopNavbar />
@@ -666,7 +666,7 @@ function TeacherClass() {
               </div>
             </form>
           </div>
-        </div>
+    </div>
       )}
     </div>
   );

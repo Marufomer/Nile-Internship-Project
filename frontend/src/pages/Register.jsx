@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { FiUpload, FiCamera } from 'react-icons/fi';
 import { compressImage, formatFileSize } from '../lib/imageUtils';
 import AuthNavbar from '../components/AuthNavbar';
+import { useDarkMode } from '../context/DarkModeContext';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isUserSignup } = useSelector(state => state.auth);
+  const { darkMode } = useDarkMode();
   
   // Animation variants
   const containerVariants = {
@@ -205,13 +207,13 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen fixed inset-0 overflow-auto font-poppins bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white flex flex-col">
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-800'} transition-colors duration-300`}>
       <AuthNavbar />
       
       {/* Animated background elements */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Simple gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-purple-900/20"></div>
+        <div className={`absolute inset-0 ${darkMode ? 'bg-gradient-to-br from-blue-900/30 to-purple-900/20' : 'bg-gradient-to-br from-gray-300/30 to-gray-400/20'}`}></div>
         
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 opacity-5">

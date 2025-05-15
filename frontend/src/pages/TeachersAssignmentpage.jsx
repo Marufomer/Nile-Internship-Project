@@ -539,7 +539,7 @@ function TeachersAssignmentpage() {
                   <p className="text-sm text-gray-500">Due Date</p>
                   <p className="font-medium">{currentAssignment.dueDate}</p>
                 </div>
-                <div>
+    <div>
                   <p className="text-sm text-gray-500">Max Score</p>
                   <p className="font-medium">{currentAssignment.maxScore}</p>
                 </div>
