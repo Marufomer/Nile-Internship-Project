@@ -25,6 +25,9 @@ import AccountSettings from './pages/AccountSettings';
 import StudentDashboard from './pages/StudentDashboard';
 import StudentCourses from './pages/StudentCourses';
 import StudentGradeReport from './pages/StudentGradeReport';
+import StudentReviewPage from './pages/StudentReviewPage';
+import AssignmentDetailsPage from './pages/AssignmentDetailsPage';
+import TeacherReviewPage from './pages/TeacherReviewPage';
 import { initializeProfileImage } from './lib/profileImageUtils';
 import { updateUserInfo } from './features/Authentication';
 
@@ -94,6 +97,8 @@ function App() {
           <Route path='Attendancepage' element={<Attendancepage/>}/>
           <Route path='TeacherSubject' element={<TeacherSubject/>}/>
           <Route path='classes' element={<TeacherClass/>}/>
+          <Route path='assignment/:assignmentId' element={<AssignmentDetailsPage />} />
+          <Route path='review/:teacherId' element={<TeacherReviewPage />} />
         </Route>
 
         <Route path='/Admin' element={<Adminpage/>}>
@@ -106,6 +111,8 @@ function App() {
           <Route path='account' element={<AccountSettings />} />
           <Route path='settings' element={<AccountSettings />} />
           <Route path='notifications' element={<Notificationpage />} />
+          <Route path='student/:studentId' element={<StudentReviewPage />} />
+          <Route path='teacher/:teacherId' element={<TeacherReviewPage />} />
         </Route>
 
         {/* Student routes */}
@@ -114,11 +121,13 @@ function App() {
           <Route path='home' element={<StudentDashboard />} />
           <Route path='courses' element={<StudentCourses />} />
           <Route path='assignments' element={<TeachersAssignmentpage />} />
+          <Route path='assignment/:assignmentId' element={<AssignmentDetailsPage />} />
           <Route path='grades' element={<StudentGradeReport />} />
           <Route path='timetable' element={<Timetable />} />
           <Route path='account' element={<AccountSettings />} />
           <Route path='settings' element={<AccountSettings />} />
           <Route path='notifications' element={<Notificationpage />} />
+          <Route path='review/:studentId' element={<StudentReviewPage />} />
         </Route>
       </Routes>
 

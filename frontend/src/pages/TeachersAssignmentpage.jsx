@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import TopNavbar from "../components/Topnavbar";
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 
 function TeachersAssignmentpage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { Authuser } = useSelector(state => state.auth);
   const [assignments, setAssignments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -302,11 +304,17 @@ function TeachersAssignmentpage() {
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleViewAssignment(assignment)}
+                          <Link
+                            to={`/teacher/assignment/${assignment.id}`}
                             className="text-blue-600 hover:text-blue-800"
                           >
-                            View
+                            Details
+                          </Link>
+                          <button
+                            onClick={() => handleViewAssignment(assignment)}
+                            className="text-blue-600 hover:text-blue-800 ml-2"
+                          >
+                            Submissions
                           </button>
                           <button
                             onClick={() => handleDeleteAssignment(assignment.id)}

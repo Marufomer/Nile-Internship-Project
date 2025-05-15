@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ProfilePicture from "./ProfilePicture";
 
 const StudentList = ({ students, isLoading, onDelete, onEdit, onViewDetails }) => {
@@ -75,12 +76,12 @@ const StudentList = ({ students, isLoading, onDelete, onEdit, onViewDetails }) =
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex space-x-2">
-                      <button
-                        onClick={() => onViewDetails(student)}
+                      <Link
+                        to={`/admin/student/${student._id}`}
                         className="text-blue-500 hover:text-blue-700"
                       >
-                        View
-                      </button>
+                        View Details
+                      </Link>
                       <button
                         onClick={() => onEdit(student)}
                         className="text-green-500 hover:text-green-700"

@@ -24,11 +24,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
-<<<<<<< HEAD
-    "framer-motion": "^10.18.0",
-=======
     "framer-motion": "^12.11.0",
->>>>>>> 865bdae994735775b8f4a6f3f0f1ddecf7622a80
     "lucide-react": "^0.508.0",
     "motion-utils": "^12.9.4",
     "react": "^18.3.1",
