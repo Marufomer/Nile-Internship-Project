@@ -71,7 +71,7 @@ const StudentList = ({ students, isLoading, onDelete, onEdit, onViewDetails }) =
                           : "bg-blue-100 text-blue-800"
                       }`}
                     >
-                      {student.status}
+                      {student?.status}
                     </span>
                   </td>
                   <td className="py-3 px-4">
