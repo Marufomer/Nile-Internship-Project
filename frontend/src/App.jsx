@@ -14,7 +14,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import Attendancepage from './pages/Attendancepage'
 import Timetable from './pages/Timetable';
 import toast, { Toaster } from 'react-hot-toast';
-import AdminTeacher from './pages/AdminTeacher';
+import { AdminTeacher } from './pages/AdminTeacher';
 import Adminpage from './pages/Adminpage'
 import TimeTable from './features/TimeTable';
 import TeachersAssignmentpage from "./pages/TeachersAssignmentpage"
@@ -31,6 +31,7 @@ import TeacherReviewPage from './pages/TeacherReviewPage';
 import { initializeProfileImage } from './lib/profileImageUtils';
 import { updateUserInfo } from './features/Authentication';
 import { DarkModeProvider } from './context/DarkModeContext';
+import AddTeacherPage from './pages/AddTeacher';
 
 function App() {
   const dispatch = useDispatch();
@@ -131,6 +132,9 @@ function App() {
             <Route path='notifications' element={<Notificationpage />} />
             <Route path='review/:studentId' element={<StudentReviewPage />} />
           </Route>
+
+          {/* Add route for adding a teacher */}
+          <Route path='/admin/teachers/add' element={<AddTeacherPage />} />
         </Routes>
 
         <Toaster />

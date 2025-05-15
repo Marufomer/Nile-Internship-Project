@@ -46,7 +46,7 @@ function TopNavbar() {
   const handleLogout = async () => {
     try {
       await dispatch(logout()).unwrap();
-      toast.success('Logged out successfully');
+      // toast.success('Logged out successfully');
       // Redirect to login page with a slight delay to ensure state is updated
       setTimeout(() => {
         navigate('/login', { replace: true });

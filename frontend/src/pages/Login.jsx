@@ -96,7 +96,7 @@ const Login = () => {
       
       if (login.fulfilled.match(resultAction)) {
         // Login successful
-        toast.success('Login successful!');
+        // toast.success('Login successful!');
         
         const user = resultAction.payload.user;
         if (!user || !user.role) {

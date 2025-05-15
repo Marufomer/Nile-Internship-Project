@@ -119,8 +119,7 @@ const TimetableSlice = createSlice({
             })
             .addCase(fetchAllTimetables.fulfilled, (state, action) => {
                 state.isTimetablesLoading = false;
-                state.Timetables = action.payload.Timetables || [];
-                toast.success("Timetables fetched successfully");
+                state.Timetables = action.payload.timetables || [];
             })
             .addCase(fetchAllTimetables.rejected, (state, action) => {
                 state.isTimetablesLoading = false;
@@ -135,10 +134,7 @@ const TimetableSlice = createSlice({
             })
             .addCase(addTimetable.fulfilled, (state, action) => {
                 state.isTimetableAdding = false;
-                if (state.Timetables) {
-                    state.Timetables.push(action.payload);
-                }
-                toast.success("Timetable added successfully");
+                state.Timetables.push(action.payload);
             })
             .addCase(addTimetable.rejected, (state, action) => {
                 state.isTimetableAdding = false;
@@ -158,7 +154,6 @@ const TimetableSlice = createSlice({
                         Timetable => Timetable._id !== action.payload.id
                     );
                 }
-                toast.success("Timetable removed successfully");
             })
             .addCase(removeTimetable.rejected, (state, action) => {
                 state.isTimetableRemoving = false;
@@ -184,7 +179,6 @@ const TimetableSlice = createSlice({
                 if (state.currentTimetable?._id === action.payload._id) {
                     state.currentTimetable = action.payload;
                 }
-                toast.success("Timetable updated successfully");
             })
             .addCase(updateTimetable.rejected, (state, action) => {
                 state.isTimetableUpdating = false;

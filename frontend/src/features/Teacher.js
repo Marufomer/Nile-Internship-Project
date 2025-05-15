@@ -113,7 +113,6 @@ extraReducers:(builder)=>{
   .addCase(gettingallTeachers.fulfilled, (state, action) => {
     state.isallTeacherget = false;
     state.getallTeachers = action.payload || [];
-    toast.success("Teachers fetched successfully");
   })
   
  
@@ -133,7 +132,6 @@ extraReducers:(builder)=>{
   .addCase(RemoveTeacher.fulfilled, (state, action) => {
     state.isTeacherremove = false;
     state. getallTeachers = state. getallTeachers.filter(Teacher => Teacher._id !== action.meta.arg);
-    toast.success("Teachers removed successfully");
   })
   
   
@@ -153,9 +151,6 @@ extraReducers:(builder)=>{
   .addCase(AddTeacher.fulfilled,(state,action)=>{
    state.isTeacheradd=false
    state.getallTeachers.push(action.payload);
-   toast.success("Teachers added successfully");
-  
- 
   })
   
  

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { FaSearch, FaTimes, FaUserGraduate, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import { FiRefreshCw } from "react-icons/fi";
+import AddTeacherPage from './AddTeacher';
 
 const AdminTeacher = () => {
   const dispatch = useDispatch();
@@ -263,4 +264,4 @@ const AdminTeacher = () => {
   );
 };
 
-export default AdminTeacher;
+export { AdminTeacher, AddTeacherPage };

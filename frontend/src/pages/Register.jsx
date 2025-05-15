@@ -178,7 +178,7 @@ const Register = () => {
         const resultAction = await dispatch(signup(payload));
         
         if (signup.fulfilled.match(resultAction)) {
-          toast.success('Account created successfully!');
+          // toast.success('Account created successfully!');
           
           const userRole = resultAction.payload.savedUser.role.toLowerCase();
           switch (userRole) {

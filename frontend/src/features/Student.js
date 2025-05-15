@@ -142,7 +142,6 @@ const StudentSlice = createSlice({
             .addCase(fetchAllStudents.fulfilled, (state, action) => {
                 state.isStudentsLoading = false;
                 state.students = action.payload.students || [];
-                toast.success("Students fetched successfully");
             })
             .addCase(fetchAllStudents.rejected, (state, action) => {
                 state.isStudentsLoading = false;
@@ -158,7 +157,6 @@ const StudentSlice = createSlice({
             .addCase(addStudent.fulfilled, (state, action) => {
                 state.isStudentAdding = false;
                 state.students.push(action.payload.student);
-                toast.success("Student added successfully");
             })
             .addCase(addStudent.rejected, (state, action) => {
                 state.isStudentAdding = false;
@@ -176,7 +174,6 @@ const StudentSlice = createSlice({
                 state.students = state.students.filter(
                     student => student._id !== action.payload.id
                 );
-                toast.success("Student removed successfully");
             })
             .addCase(removeStudent.rejected, (state, action) => {
                 state.isStudentRemoving = false;
@@ -200,7 +197,6 @@ const StudentSlice = createSlice({
                 if (state.currentStudent?._id === action.payload.student._id) {
                     state.currentStudent = action.payload.student;
                 }
-                toast.success("Student updated successfully");
             })
             .addCase(updateStudent.rejected, (state, action) => {
                 state.isStudentUpdating = false;

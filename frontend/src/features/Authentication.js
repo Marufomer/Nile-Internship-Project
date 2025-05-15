@@ -191,7 +191,7 @@ const authSlice = createSlice({
         state.isUserSignup = false;
         state.Authuser = action.payload.savedUser; 
         state.token = action.payload.token; 
-        toast.success("Signup successful!")
+        // toast.success("Signup successful!")
       })
       .addCase(signup.rejected, (state, action) => {
         state.isUserSignup = false;
@@ -207,7 +207,7 @@ const authSlice = createSlice({
         state.Authuser = action.payload.user; 
         state.token = action.payload.token;
         state.rememberMe = action.payload.rememberMe;
-        toast.success("Login successfully")
+        // toast.success("Login successfully")
       })
       .addCase(login.rejected, (state, action) => {
         state.isUserLogin = false;
@@ -219,7 +219,7 @@ const authSlice = createSlice({
         state.Authuser = null;
         state.token = null;
         // Don't reset rememberMe preference
-        toast.success("Successfully logged out!");
+        // toast.success("Successfully logged out!");
       })
       .addCase(logout.rejected, (state, action) => {
      
@@ -235,7 +235,7 @@ const authSlice = createSlice({
           ...state.Authuser,
           ...action.payload
         };
-        toast.success("Profile information updated successfully");
+        // toast.success("Profile information updated successfully");
       })
       
       .addCase(updateUserInfo.rejected, (state, action) => {

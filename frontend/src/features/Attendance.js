@@ -101,7 +101,6 @@ const attendanceSlice = createSlice({
       .addCase(getAllAttendance.fulfilled, (state, action) => {
         state.isAttendanceLoading = false;
         state.allAttendance = action.payload.attendances || [];
-        toast.success("Attendance records fetched successfully");
       })
       .addCase(getAllAttendance.rejected, (state, action) => {
         state.isAttendanceLoading = false;
@@ -117,7 +116,6 @@ const attendanceSlice = createSlice({
         state.allAttendance = state.allAttendance.filter(
           (attendance) => attendance._id !== action.meta.arg
         );
-        toast.success("Attendance record removed successfully");
       })
       .addCase(removeAttendance.rejected, (state, action) => {
         state.isAttendanceRemoved = false;
@@ -135,7 +133,6 @@ const attendanceSlice = createSlice({
         } else {
           state.allAttendance = [action.payload];
         }
-        toast.success("Attendance added successfully");
       })
       .addCase(addAttendance.rejected, (state, action) => {
         state.isAttendanceAdded = false;
@@ -159,7 +156,6 @@ const attendanceSlice = createSlice({
             state.allAttendance[index] = action.payload;
           }
         }
-        toast.success("Attendance updated successfully");
       })
       .addCase(updateAttendance.rejected, (state, action) => {
         state.isUpdating = false;

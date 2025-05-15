@@ -1,11 +1,9 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { FiUpload, FiTrash2, FiSave, FiX, FiTrash } from "react-icons/fi";
+import { FiUpload, FiSave, FiX } from "react-icons/fi";
 import TopNavbar from "../../../frontend/src/components/Topnavbar";
-import { useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { AddTeacher, RemoveTeacher, EditTeacher } from "../features/Teacher";
+import { AddTeacher } from "../features/Teacher";
 
 const validationSchema = yup.object({
   Firstname: yup.string().required("Firstname is required"),
@@ -41,20 +39,13 @@ function AddTeacherPage() {
   });
 
   const handleSubmit = (values) => {
-    console.log("Form submitted:", values);
     dispatch(AddTeacher(values));
     formik.resetForm();
-  };
-
-  const handleDelete = (TeacherId) => {
-    dispatch(RemoveTeacher(TeacherId));
   };
 
   return (
     <>
       <TopNavbar />
-      <Toaster />
-
       <h1 className="mt-10 ml-20 font-medium text-3xl text-gray-500">Add Teacher</h1>
       <hr className="mb-10 mt-5"></hr>
       <form
@@ -143,4 +134,4 @@ function AddTeacherPage() {
   );
 }
 
-export default AddTeacherPage;
+export default AddTeacherPage; 

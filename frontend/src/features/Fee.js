@@ -155,7 +155,6 @@ const FeeSlice = createSlice({
             .addCase(addFee.fulfilled, (state, action) => {
                 state.isFeeAdding = false;
                 state.fees.push(action.payload);
-                toast.success("Fee added successfully");
             })
             .addCase(addFee.rejected, (state, action) => {
                 state.isFeeAdding = false;
@@ -170,10 +169,7 @@ const FeeSlice = createSlice({
             })
             .addCase(removeFee.fulfilled, (state, action) => {
                 state.isFeeRemoving = false;
-                state.fees = state.fees.filter(
-                    fee => fee._id !== action.payload.id
-                );
-                toast.success("Fee removed successfully");
+                state.fees = state.fees.filter(fee => fee._id !== action.payload.id);
             })
             .addCase(removeFee.rejected, (state, action) => {
                 state.isFeeRemoving = false;
@@ -197,7 +193,6 @@ const FeeSlice = createSlice({
                 if (state.currentFee?._id === action.payload._id) {
                     state.currentFee = action.payload;
                 }
-                toast.success("Fee updated successfully");
             })
             .addCase(updateFee.rejected, (state, action) => {
                 state.isFeeUpdating = false;
@@ -221,7 +216,6 @@ const FeeSlice = createSlice({
                     state.currentFee = action.payload;
                 }
                 state.isPaid = true;
-                toast.success("Fee marked as paid successfully");
             })
             .addCase(markFeePaid.rejected, (state, action) => {
                 state.isFeeUpdating = false;

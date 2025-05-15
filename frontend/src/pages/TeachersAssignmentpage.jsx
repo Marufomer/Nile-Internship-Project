@@ -126,19 +126,13 @@ function TeachersAssignmentpage() {
     }
 
     // Mock API call to create assignment
-    toast.success('Assignment created successfully');
-    setShowAddModal(false);
-    
-    // Add the new assignment to the list (in a real app, you'd get the ID from the API)
-    const newAssignment = {
+    setAssignments(prev => [...prev, {
       id: Date.now().toString(),
       ...formData,
       createdAt: format(new Date(), 'yyyy-MM-dd'),
       submissionCount: 0,
       gradedCount: 0
-    };
-    
-    setAssignments(prev => [newAssignment, ...prev]);
+    }]);
     
     // Reset form
     setFormData({
@@ -206,8 +200,6 @@ function TeachersAssignmentpage() {
       )
     );
     
-    toast.success('Grade submitted successfully');
-    
     // Update the graded count in the assignments list
     if (currentAssignment) {
       setAssignments(prev => 
@@ -224,7 +216,6 @@ function TeachersAssignmentpage() {
     if (window.confirm('Are you sure you want to delete this assignment?')) {
       // Mock API call to delete assignment
       setAssignments(prev => prev.filter(a => a.id !== assignmentId));
-      toast.success('Assignment deleted successfully');
     }
   };
 

@@ -199,7 +199,7 @@ function TeacherClass() {
     };
     
     setActivities(prev => [newActivityWithId, ...prev]);
-    toast.success('Activity added successfully');
+    // toast.success('Activity added successfully');
     setShowAddActivityModal(false);
     
     // Reset form
@@ -216,7 +216,7 @@ function TeacherClass() {
     if (window.confirm('Are you sure you want to delete this activity?')) {
       // Mock API call to delete activity
       setActivities(prev => prev.filter(a => a.id !== activityId));
-      toast.success('Activity deleted successfully');
+      // toast.success('Activity deleted successfully');
     }
   };
   
@@ -666,7 +666,7 @@ function TeacherClass() {
               </div>
             </form>
           </div>
-    </div>
+        </div>
       )}
     </div>
   );

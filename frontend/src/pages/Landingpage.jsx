@@ -78,10 +78,6 @@ function Landingpage() {
     hover: {
       scale: 1.02,
       boxShadow: "0 10px 40px -15px rgba(0, 0, 0, 0.1)",
-      backgroundColor: "#f3f4f6",
-      dark: {
-        backgroundColor: "#1f2937"
-      },
       transition: { type: "spring", stiffness: 300, damping: 20 }
     }
   };
@@ -619,7 +615,6 @@ function Landingpage() {
                   key={idx}
                   custom={idx}
                   variants={faqItemVariants}
-                  whileHover="hover"
                   className="bg-gray-200/60 dark:bg-gray-800/60 backdrop-blur-sm p-6 rounded-xl shadow-lg overflow-hidden border border-gray-300/50 dark:border-gray-700/50 border-l-4 border-l-green-500"
                 >
                   <div
