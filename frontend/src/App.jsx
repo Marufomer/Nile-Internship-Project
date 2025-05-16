@@ -13,7 +13,7 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard'
 import Attendancepage from './pages/Attendancepage'
 import Timetable from './pages/Timetable';
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
 import { AdminTeacher } from './pages/AdminTeacher';
 import Adminpage from './pages/Adminpage'
 import TimeTable from './features/TimeTable';

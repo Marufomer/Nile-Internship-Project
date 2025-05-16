@@ -149,6 +149,10 @@ module.exports.login = async (req, res) => {
   }
 };
 
+module.exports.auth = async(req, res) => {
+  
+};
+
 module.exports.logout = async (req, res) => {
   try {
     res.cookie("Schoolmanagmentsystem", "", { maxAge: 0 });

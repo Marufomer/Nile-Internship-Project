@@ -9,6 +9,7 @@ const {authmiddleware,Adminmiddleware,Managermiddleware,Teachermiddleware,Studen
 
 router.post("/signup",signup)
 router.post("/login",login)
+
 router.post("/logout",logout)
 router.put(
   "/updateProfile",
@@ -19,6 +20,9 @@ router.put("/updateUserInfo",authmiddleware,updateUserInfo)
 
 router.post("/forgot-password", ForgotPassword);
 router.patch("/reset-password/:token", ResetPassword);
+
+// Google outhentication
+router.post("/login/auth/google", login);
 
 
 
