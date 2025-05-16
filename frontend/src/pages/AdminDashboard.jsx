@@ -462,9 +462,7 @@ function AdminDashboard() {
                         </div>
                       </div>
                       <div className="flex-shrink-0">
-                        <Link to={`/Admin/students/${student._id}`} className="text-blue-600 hover:text-blue-800 text-sm">
-                          Details
-                        </Link>
+                        {/* Details button removed as requested */}
                       </div>
                     </motion.div>
                   ))}

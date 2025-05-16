@@ -33,6 +33,8 @@ import { initializeProfileImage } from './lib/profileImageUtils';
 import { updateUserInfo } from './features/Authentication';
 import { DarkModeProvider } from './context/DarkModeContext';
 import AddTeacherPage from './pages/AddTeacher';
+import StudentAssignmentDetails from './pages/StudentAssignmentDetails';
+import StudentAssignmentSubmit from './pages/StudentAssignmentSubmit';
 
 function App() {
   const dispatch = useDispatch();
@@ -133,6 +135,8 @@ function App() {
             <Route path='settings' element={<AccountSettings />} />
             <Route path='notifications' element={<Notificationpage />} />
             <Route path='review/:studentId' element={<StudentReviewPage />} />
+            <Route path='assignments/:assignmentId' element={<StudentAssignmentDetails />} />
+            <Route path='assignments/:assignmentId/submit' element={<StudentAssignmentSubmit />} />
           </Route>
 
           {/* Add route for adding a teacher */}
