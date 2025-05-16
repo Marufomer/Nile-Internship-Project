@@ -131,13 +131,13 @@ function LoadingScreen() {
         <FiLoader />
       </motion.div>
       <motion.h2 
-        className="text-black text-2xl font-bold"
+        className="text-white text-2xl font-bold"
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
         Loading Dashboard...
       </motion.h2>
-      <p className="text-blue-200 mt-2">Please wait while we prepare your experience</p>
+      <p className="text-white mt-2">Please wait while we prepare your experience</p>
     </motion.div>
   );
 }

@@ -153,11 +153,11 @@ function Sidebar({ isOpen, setIsOpen }) {
         {/* Navigation Menu */}
         <nav className="flex-1 space-y-1 overflow-y-auto scrollbar-hide">
           <NavLink 
-            to={Authuser.role.toLowerCase() === 'admin' ? '/admin/admindashboard' : `/${Authuser.role.toLowerCase()}/dashboard`} 
+            to={Authuser.role.toLowerCase() === 'admin' ? '/admin/home' : `/${Authuser.role.toLowerCase()}/home`} 
             icon={<MdDashboard />}
             title="Dashboard"
             isOpen={isOpen}
-            active={isActive('dashboard') || isActive('admindashboard')}
+            active={isActive('home') || isActive('dashboard')}
             onHover={() => setHoveredItem('dashboard')}
             isHovered={hoveredItem === 'dashboard'}
           />

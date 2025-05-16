@@ -37,6 +37,7 @@ import StudentAssignmentDetails from './pages/StudentAssignmentDetails';
 import StudentAssignmentSubmit from './pages/StudentAssignmentSubmit';
 import StudentCourseAssignments from './pages/StudentCourseAssignments';
 import StudentCourseDetails from './pages/StudentCourseDetails';
+import StudentLayout from './layouts/StudentLayout';
 
 function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ function App() {
           <Route path='/logout' element={<Navigate to="/login" replace />} />
           
           <Route path='/teacher' element={<Teacherpage />}>
+            <Route path='home' element={<TeacherDashboardpage />} />
             <Route path='dashboard' element={<TeacherDashboardpage />} />
             <Route path='account' element={<AccountSettings />} />
             <Route path='settings' element={<AccountSettings />} />
@@ -111,6 +113,7 @@ function App() {
           </Route>
 
           <Route path='/Admin' element={<Adminpage/>}>
+            <Route path='home' element={<AdminDashboard />} />
             <Route index element={<AdminDashboard />} />
             <Route path='admindashboard' element={<AdminDashboard />} />
             <Route path='AdminTeacher' element={<AdminTeacher/>} />
@@ -124,23 +127,16 @@ function App() {
             <Route path='teacher/:teacherId' element={<TeacherReviewPage />} />
           </Route>
 
-          {/* Student routes */}
-          <Route path='/student' element={<Adminpage/>}>
-            <Route index element={<StudentDashboard />} />
+          <Route path='/student' element={<StudentLayout />}>
             <Route path='home' element={<StudentDashboard />} />
+            <Route path='dashboard' element={<StudentDashboard />} />
             <Route path='courses' element={<StudentCourses />} />
-            <Route path='assignments' element={<TeachersAssignmentpage />} />
-            <Route path='assignment/:assignmentId' element={<AssignmentDetailsPage />} />
+            <Route path='assignments' element={<StudentAssignmentDetails />} />
             <Route path='grades' element={<StudentGradeReport />} />
             <Route path='timetable' element={<Timetable />} />
             <Route path='account' element={<AccountSettings />} />
             <Route path='settings' element={<AccountSettings />} />
             <Route path='notifications' element={<Notificationpage />} />
-            <Route path='review/:studentId' element={<StudentReviewPage />} />
-            <Route path='assignments/:assignmentId' element={<StudentAssignmentDetails />} />
-            <Route path='assignments/:assignmentId/submit' element={<StudentAssignmentSubmit />} />
-            <Route path='course/:courseId/assignments' element={<StudentCourseAssignments />} />
-            <Route path='course/:courseId' element={<StudentCourseDetails />} />
           </Route>
 
           {/* Add route for adding a teacher */}

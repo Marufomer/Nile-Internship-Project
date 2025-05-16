@@ -147,13 +147,13 @@ export const getRedirectPathByRole = (role) => {
   
   switch (normalizedRole) {
     case 'admin':
-      return '/admin/admindashboard';
+      return '/admin/home';
     case 'teacher':
-      return '/teacher/dashboard';
+      return '/teacher/home';
     case 'student':
       return '/student/home';
     case 'manager':
-      return '/admin/manage';
+      return '/admin/home';
     default:
       return '/';
   }
