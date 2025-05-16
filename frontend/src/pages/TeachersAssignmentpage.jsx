@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import TopNavbar from "../components/Topnavbar";
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 function TeachersAssignmentpage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { assignmentId } = useParams();
   const { Authuser } = useSelector(state => state.auth);
   const [assignments, setAssignments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -90,6 +91,58 @@ function TeachersAssignmentpage() {
 
     fetchAssignments();
   }, []);
+
+  // If assignmentId is present, fetch and display only that assignment
+  useEffect(() => {
+    if (assignmentId) {
+      const assignment = assignments.find(a => a.id === assignmentId);
+      if (assignment) {
+        setCurrentAssignment(assignment);
+        setShowViewModal(true);
+        // Mock API call to fetch submissions for this assignment
+        setIsSubmissionsLoading(true);
+        setTimeout(() => {
+          const mockSubmissions = [
+            {
+              id: '1',
+              studentId: '101',
+              studentName: 'John Doe',
+              submittedAt: '2023-12-10T14:30:00',
+              status: 'submitted',
+              grade: null,
+              feedback: '',
+              attachments: ['homework1.pdf']
+            },
+            {
+              id: '2',
+              studentId: '102',
+              studentName: 'Jane Smith',
+              submittedAt: '2023-12-11T09:15:00',
+              status: 'graded',
+              grade: 85,
+              feedback: 'Good work, but could improve on section 3.',
+              attachments: ['assignment.docx', 'notes.pdf']
+            },
+            {
+              id: '3',
+              studentId: '103',
+              studentName: 'Michael Johnson',
+              submittedAt: '2023-12-12T16:45:00',
+              status: 'submitted',
+              grade: null,
+              feedback: '',
+              attachments: ['michael_homework.pdf']
+            }
+          ];
+          setSubmissions(mockSubmissions);
+          setIsSubmissionsLoading(false);
+        }, 1000);
+      } else {
+        toast.error('Assignment not found');
+        navigate('/teacher/TeachersAssignmentpage');
+      }
+    }
+  }, [assignmentId, assignments, navigate]);
 
   // Filter assignments based on active tab
   const filteredAssignments = assignments.filter(assignment => {
@@ -199,17 +252,6 @@ function TeachersAssignmentpage() {
           : sub
       )
     );
-    
-    // Update the graded count in the assignments list
-    if (currentAssignment) {
-      setAssignments(prev => 
-        prev.map(assignment => 
-          assignment.id === currentAssignment.id 
-            ? { ...assignment, gradedCount: assignment.gradedCount + 1 } 
-            : assignment
-        )
-      );
-    }
   };
 
   const handleDeleteAssignment = (assignmentId) => {
@@ -218,6 +260,51 @@ function TeachersAssignmentpage() {
       setAssignments(prev => prev.filter(a => a.id !== assignmentId));
     }
   };
+
+  // If assignmentId is present, show only that assignment's details
+  if (assignmentId) {
+    const assignment = assignments.find(a => a.id === assignmentId);
+    if (isLoading) {
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <TopNavbar />
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        </div>
+      );
+    }
+    if (!assignment) {
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <TopNavbar />
+          <div className="flex flex-col items-center justify-center h-64">
+            <p className="text-gray-500 text-lg">Assignment not found.</p>
+            <Link to="/teacher/TeachersAssignmentpage" className="mt-4 text-blue-600 hover:underline">Back to Assignments</Link>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="min-h-screen bg-gray-100">
+        <TopNavbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">{assignment.title}</h1>
+            <p className="mb-2 text-gray-700"><span className="font-semibold">Class:</span> {assignment.class}</p>
+            <p className="mb-2 text-gray-700"><span className="font-semibold">Subject:</span> {assignment.subject}</p>
+            <p className="mb-2 text-gray-700"><span className="font-semibold">Due Date:</span> {assignment.dueDate}</p>
+            <p className="mb-2 text-gray-700"><span className="font-semibold">Max Score:</span> {assignment.maxScore}</p>
+            <p className="mb-4 text-gray-700"><span className="font-semibold">Description:</span> {assignment.description}</p>
+            <div className="flex gap-4">
+              <Link to="/teacher/TeachersAssignmentpage" className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Back</Link>
+              {/* You can add more actions here, e.g., view submissions, edit, etc. */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -296,7 +383,7 @@ function TeachersAssignmentpage() {
                       <td className="py-3 px-4">
                         <div className="flex space-x-2">
                           <Link
-                            to={`/teacher/assignment/${assignment.id}`}
+                            to={`/teacher/TeachersAssignmentpage/${assignment.id}`}
                             className="text-blue-600 hover:text-blue-800"
                           >
                             Details

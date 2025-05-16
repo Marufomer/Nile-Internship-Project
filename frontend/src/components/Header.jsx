@@ -63,11 +63,6 @@ const Header = () => {
                 {darkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
               </button>
               <button
-                className="bg-green-500 hover:bg-green-600 text-white w-32 h-10 rounded-lg transition-colors duration-300 text-sm"
-              >
-                Learn More
-              </button>
-              <button
                 className="bg-gradient-to-r from-green-500 to-blue-500 text-white w-32 h-10 hover:from-green-600 hover:to-blue-600 rounded-lg transition-colors duration-300 text-sm"
                 onClick={() => navigate('/register')}
               >

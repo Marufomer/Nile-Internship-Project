@@ -129,8 +129,10 @@ const Login = () => {
     }
   };
 
+  // Add Google Sign-In handler
   const handleGoogleLogin = () => {
-    console.log("Google login clicked");
+    // TODO: Implement Google OAuth logic here
+    toast('Google Sign-In is not yet implemented.', { icon: '⚡' });
   };
 
   return (
@@ -169,6 +171,16 @@ const Login = () => {
                 <img src={CampanyLogo} alt="Logo" className="h-14 sm:h-16 w-auto" />
               </div>
               
+              {/* Google Sign-In Button */}
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className={`w-full flex items-center justify-center gap-3 py-2.5 mb-5 rounded-lg font-semibold shadow transition-all duration-200 border ${darkMode ? 'bg-gray-900 border-gray-700 text-white hover:bg-gray-700' : 'bg-white border-gray-300 text-gray-800 hover:bg-gray-100'}`}
+              >
+                <img src={Google} alt="Google" className="w-5 h-5" />
+                Sign in with Google
+              </button>
+
               <motion.div variants={itemVariants} className="text-center mb-5 sm:mb-6">
                 <h2 className={`text-xl sm:text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Welcome Back</h2>
                 <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} text-sm`}>Please sign in to continue</p>
@@ -279,21 +291,6 @@ const Login = () => {
                   <hr className={`flex-1 ${darkMode ? 'border-gray-700' : 'border-gray-300'}`} />
                   <span className={`mx-4 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>or</span>
                   <hr className={`flex-1 ${darkMode ? 'border-gray-700' : 'border-gray-300'}`} />
-                </motion.div>
-
-                <motion.div variants={itemVariants}>
-                  <button
-                    type="button"
-                    onClick={handleGoogleLogin}
-                    className={`w-full py-2.5 px-4 border ${darkMode ? 'border-gray-600 bg-gray-700/30 text-white hover:bg-gray-700/50' : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'} rounded-lg font-medium flex items-center justify-center transition-colors duration-300`}
-                  >
-                    <img
-                      src={Google}
-                      alt="Google Logo"
-                      className="w-5 h-5 mr-2"
-                    />
-                    Sign in with Google
-                  </button>
                 </motion.div>
               </form>
 

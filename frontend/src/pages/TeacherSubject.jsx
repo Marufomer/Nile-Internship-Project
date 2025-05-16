@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import TopNavbar from "../../../frontend/src/components/Topnavbar";
 import { FaBook, FaFlask, FaAtom, FaHistory, FaCheckCircle, FaInfoCircle } from 'react-icons/fa';
 import { FiSearch } from "react-icons/fi";
+import { useParams, Link } from 'react-router-dom';
 
 function TeacherSubject() {
+  const { subjectId } = useParams();
   const [enrolled, setEnrolled] = useState([false, true, false, true]);
 
   const toggleEnrollment = (index) => {
@@ -46,6 +48,42 @@ function TeacherSubject() {
       color: "bg-gray-100"
     }
   ];
+
+  // If subjectId is present, show only that subject's details
+  if (subjectId) {
+    const index = parseInt(subjectId, 10) - 1;
+    const subject = classes[index];
+    if (!subject) {
+      return (
+        <div className="min-h-screen bg-gray-300">
+          <TopNavbar />
+          <div className="flex flex-col items-center justify-center h-64">
+            <p className="text-gray-500 text-lg">Subject not found.</p>
+            <Link to="/teacher/TeacherSubject" className="mt-4 text-blue-600 hover:underline">Back to Subjects</Link>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="min-h-screen bg-gray-300">
+        <TopNavbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-xl mx-auto bg-white rounded-xl shadow-md p-8">
+            <div className="flex justify-between items-start mb-4">
+              {subject.icon}
+              <span className="px-3 py-1 bg-gray-800 text-white rounded-full text-sm font-semibold shadow-lg">{subject.grade}</span>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">{subject.name}</h3>
+            <p className="text-gray-800 mb-4">{subject.description}</p>
+            <div className="flex gap-4">
+              <Link to="/teacher/TeacherSubject" className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">Back</Link>
+              {/* You can add more actions here, e.g., enroll/unenroll, etc. */}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-300">

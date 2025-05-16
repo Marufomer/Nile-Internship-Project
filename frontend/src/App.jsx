@@ -28,6 +28,7 @@ import StudentGradeReport from './pages/StudentGradeReport';
 import StudentReviewPage from './pages/StudentReviewPage';
 import AssignmentDetailsPage from './pages/AssignmentDetailsPage';
 import TeacherReviewPage from './pages/TeacherReviewPage';
+import AssignmentReviewPage from './pages/AssignmentReviewPage';
 import { initializeProfileImage } from './lib/profileImageUtils';
 import { updateUserInfo } from './features/Authentication';
 import { DarkModeProvider } from './context/DarkModeContext';
@@ -96,6 +97,7 @@ function App() {
             <Route path='settings' element={<AccountSettings />} />
             <Route path='timetable' element={<Timetable />} />
             <Route path='TeachersAssignmentpage' element={<TeachersAssignmentpage />} />
+            <Route path='TeachersAssignmentpage/:assignmentId' element={<AssignmentReviewPage />} />
             <Route path='notifications' element={<Notificationpage />} />
             <Route path='Attendancepage' element={<Attendancepage/>}/>
             <Route path='TeacherSubject' element={<TeacherSubject/>}/>
