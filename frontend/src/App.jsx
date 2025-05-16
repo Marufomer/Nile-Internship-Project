@@ -35,6 +35,8 @@ import { DarkModeProvider } from './context/DarkModeContext';
 import AddTeacherPage from './pages/AddTeacher';
 import StudentAssignmentDetails from './pages/StudentAssignmentDetails';
 import StudentAssignmentSubmit from './pages/StudentAssignmentSubmit';
+import StudentCourseAssignments from './pages/StudentCourseAssignments';
+import StudentCourseDetails from './pages/StudentCourseDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -137,6 +139,8 @@ function App() {
             <Route path='review/:studentId' element={<StudentReviewPage />} />
             <Route path='assignments/:assignmentId' element={<StudentAssignmentDetails />} />
             <Route path='assignments/:assignmentId/submit' element={<StudentAssignmentSubmit />} />
+            <Route path='course/:courseId/assignments' element={<StudentCourseAssignments />} />
+            <Route path='course/:courseId' element={<StudentCourseDetails />} />
           </Route>
 
           {/* Add route for adding a teacher */}

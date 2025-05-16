@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 import { FiBook, FiUsers, FiClock, FiCalendar, FiFileText, FiDownload, FiUpload, FiCheckCircle } from 'react-icons/fi';
 import TopNavbar from '../components/Topnavbar';
 
+const mockCourses = [
+  { id: '1', name: 'Mathematics 101', code: 'MATH101', teacher: 'Dr. Sarah Johnson', schedule: 'Mon, Wed 10:00 AM - 11:30 AM', description: 'Introduction to calculus, linear algebra, and statistics' },
+  { id: '2', name: 'Introduction to Physics', code: 'PHYS201', teacher: 'Prof. Michael Chen', schedule: 'Tue, Thu 1:00 PM - 2:30 PM', description: 'Fundamental principles of mechanics, thermodynamics, and electromagnetism' },
+  { id: '3', name: 'World History', code: 'HIST101', teacher: 'Dr. Emily Rodriguez', schedule: 'Wed, Fri 9:00 AM - 10:30 AM', description: 'A survey of world civilizations from ancient times to the present' },
+];
+
 function StudentCourseDetails() {
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
