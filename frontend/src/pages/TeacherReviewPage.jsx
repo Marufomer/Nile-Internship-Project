@@ -6,7 +6,9 @@ import TopNavbar from '../components/Topnavbar';
 import { FiUser, FiCalendar, FiBookOpen, FiUsers, FiBarChart2, FiClock, FiCheckCircle, FiMessageSquare, FiFileText } from 'react-icons/fi';
 
 const TeacherReviewPage = () => {
-  const { teacherId } = useParams();
+  const { teacherId: paramTeacherId } = useParams();
+  const { Authuser } = useSelector(state => state.auth);
+  const teacherId = paramTeacherId || Authuser?._id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   

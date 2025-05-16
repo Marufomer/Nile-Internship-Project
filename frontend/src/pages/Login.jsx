@@ -131,20 +131,8 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async (credentialResponse) => {
-    const { credential } = credentialResponse;
-
-    console.log(credential)
-    // try {
-    //   const res = await axios.post("http://localhost:5000/api/auth/google", {
-    //     idToken: credential
-    //   });
-
-    //   console.log("Logged in:", res.data);
-    //   // Save res.data.token to localStorage or cookie
-    // } catch (err) {
-    //   console.error("Login failed:", err);
-    // }
+  const handleGoogleLogin = () => {
+    console.log("Google login clicked");
   };
 
   return (
@@ -214,25 +202,10 @@ const Login = () => {
                   className="h-14 sm:h-16 w-auto"
                 />
               </div>
-
-              <motion.div
-                variants={itemVariants}
-                className="text-center mb-5 sm:mb-6"
-              >
-                <h2
-                  className={`text-xl sm:text-2xl font-bold mb-2 ${
-                    darkMode ? "text-white" : "text-gray-800"
-                  }`}
-                >
-                  Welcome Back
-                </h2>
-                <p
-                  className={`${
-                    darkMode ? "text-gray-300" : "text-gray-600"
-                  } text-sm`}
-                >
-                  Please sign in to continue
-                </p>
+              
+              <motion.div variants={itemVariants} className="text-center mb-5 sm:mb-6">
+                <h2 className={`text-xl sm:text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Welcome Back</h2>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} text-sm`}>Please sign in to continue</p>
               </motion.div>
 
               {/* Login Error Message */}
@@ -412,16 +385,14 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={handleGoogleLogin}
-                    className={`w-full py-2.5 px-4 border ${
-                      darkMode
-                        ? "border-gray-600 bg-gray-700/30 text-white hover:bg-gray-700/50"
-                        : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                    } rounded-lg font-medium flex items-center justify-center transition-colors duration-300`}
+                    className={`w-full py-2.5 px-4 border ${darkMode ? 'border-gray-600 bg-gray-700/30 text-white hover:bg-gray-700/50' : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'} rounded-lg font-medium flex items-center justify-center transition-colors duration-300`}
                   >
-                    <GoogleLogin
-                      onSuccess={handleGoogleLogin}
-                      onError={() => console.log("Login Failed")}
+                    <img
+                      src={Google}
+                      alt="Google Logo"
+                      className="w-5 h-5 mr-2"
                     />
+                    Sign in with Google
                   </button>
                 </motion.div>
               </form>

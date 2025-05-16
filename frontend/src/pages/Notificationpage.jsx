@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import TopNavbar from '../components/Topnavbar';
 import { FiBell, FiMail, FiCalendar, FiBookOpen, FiTrash2, FiCheck, FiFilter } from 'react-icons/fi';
 import { MdPayment, MdAssignment } from 'react-icons/md';
@@ -14,68 +14,28 @@ const Notificationpage = () => {
     message: true,
     calendar: true,
   });
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
   
-  // Mock notifications data
-  const mockNotifications = [
-    {
-      id: 1,
-      type: 'system',
-      title: 'System Maintenance',
-      message: 'The system will be down for maintenance on Saturday from 2 AM to 4 AM.',
-      timestamp: '2023-11-01T08:30:00',
-      read: false,
-    },
-    {
-      id: 2,
-      type: 'academic',
-      title: 'Grade Update',
-      message: 'Your grade for Mathematics has been updated. You received an A.',
-      timestamp: '2023-10-30T14:45:00',
-      read: false,
-    },
-    {
-      id: 3,
-      type: 'payment',
-      title: 'Payment Due',
-      message: 'Your tuition payment is due in 5 days. Please make the payment before the deadline.',
-      timestamp: '2023-10-29T10:15:00',
-      read: false,
-    },
-    {
-      id: 4,
-      type: 'message',
-      title: 'New Message from Teacher',
-      message: 'You have a new message from Ms. Johnson regarding your homework submission.',
-      timestamp: '2023-10-28T16:20:00',
-      read: true,
-    },
-    {
-      id: 5,
-      type: 'calendar',
-      title: 'Event Reminder',
-      message: 'Don\'t forget about the science fair tomorrow at 3 PM in the main hall.',
-      timestamp: '2023-10-27T09:00:00',
-      read: true,
-    },
-    {
-      id: 6,
-      type: 'academic',
-      title: 'Assignment Due',
-      message: 'Your history assignment is due tomorrow by midnight.',
-      timestamp: '2023-10-26T11:30:00',
-      read: true,
-    },
-    {
-      id: 7,
-      type: 'payment',
-      title: 'Payment Confirmed',
-      message: 'Your recent payment of $250 has been successfully processed.',
-      timestamp: '2023-10-25T13:45:00',
-      read: true,
-    },
-  ];
-  
-  const [notifications, setNotifications] = useState(mockNotifications);
+  // Fetch notifications from API
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      setLoading(true);
+      try {
+        // Replace with your actual API endpoint
+        const response = await fetch('/api/notifications');
+        if (!response.ok) throw new Error('Failed to fetch notifications');
+        const data = await response.json();
+        setNotifications(data.notifications || []);
+      } catch (error) {
+        setNotifications([]);
+        // Optionally show a toast or error message
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNotifications();
+  }, []);
   
   // Filter notifications based on the active tab and type filters
   const filteredNotifications = notifications.filter(notification => {
@@ -279,9 +239,17 @@ const Notificationpage = () => {
           </button>
         </motion.div>
         
-        {/* Notifications list */}
-        <motion.div variants={containerVariants}>
-          {filteredNotifications.length > 0 ? (
+        {/* Loading spinner */}
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        ) : filteredNotifications.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
+            No notifications found
+          </div>
+        ) : (
+          <motion.div variants={containerVariants}>
             <div className="space-y-4">
               {filteredNotifications.map(notification => (
                 <motion.div 
@@ -328,26 +296,8 @@ const Notificationpage = () => {
                 </motion.div>
               ))}
             </div>
-          ) : (
-            <motion.div 
-              className="bg-white rounded-lg shadow-md p-8 text-center"
-              variants={itemVariants}
-            >
-              <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                <FiBell className="text-gray-400 text-2xl" />
-              </div>
-              <h3 className="text-lg font-medium text-gray-700">No notifications</h3>
-              <p className="text-gray-500 mt-1">
-                {activeTab === 'all' ? 
-                  "You don't have any notifications that match your filters." : 
-                  activeTab === 'unread' ? 
-                    "You don't have any unread notifications." : 
-                    "You don't have any read notifications."
-                }
-              </p>
-            </motion.div>
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );

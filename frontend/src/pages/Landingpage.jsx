@@ -343,7 +343,10 @@ function Landingpage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => navigator("/teacher")}
+                onClick={() => {
+                  const featuresSection = document.getElementById('features');
+                  featuresSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="bg-green-500 hover:bg-green-600 w-40 text-white font-bold py-3 px-6 rounded-lg"
               >
                 Learn More

@@ -3,7 +3,7 @@ import TopNavbar from "../components/Topnavbar";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FiBookOpen, FiUsers, FiClipboard, FiCalendar, FiClock, FiPlusCircle, FiCheckCircle, FiActivity } from "react-icons/fi";
+import { FiBookOpen, FiUsers, FiClipboard, FiCalendar, FiClock, FiPlusCircle, FiCheckCircle, FiActivity, FiStar } from "react-icons/fi";
 
 function TeacherDashboardpage() {
   const { Authuser } = useSelector((state) => state.auth);
@@ -148,7 +148,7 @@ function TeacherDashboardpage() {
         </motion.div>
         
         {/* Stats Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           {/* Classes Stats */}
           <motion.div 
             className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
@@ -256,6 +256,22 @@ function TeacherDashboardpage() {
                   <FiClock className="mr-1" /> View Schedule
                 </Link>
               </div>
+            </div>
+          </motion.div>
+          
+          {/* Review Card */}
+          <motion.div 
+            className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
+            variants={itemVariants}
+          >
+            <div className="p-1 bg-gradient-to-r from-yellow-400 to-yellow-600"></div>
+            <div className="p-6 flex flex-col items-center justify-center">
+              <div className="p-3 rounded-full bg-yellow-100 mb-4">
+                <FiStar className="text-yellow-600 text-2xl" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Review</h3>
+              <p className="text-sm text-gray-600 mb-4 text-center">View and analyze your teaching performance, feedback, and class stats.</p>
+              <Link to="/teacher/review" className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium">Go to Review</Link>
             </div>
           </motion.div>
         </div>
